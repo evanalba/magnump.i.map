@@ -11,7 +11,15 @@ body {
   height: 10%;
 }
 
-.info {
+.logo {
+  height: 50%;
+  max-width: 85%;
+  padding-left: 1em;
+  padding-top: 1em;
+  width: auto;
+}
+
+.credits {
   color: white;
   cursor: pointer;
   position: fixed;
@@ -19,12 +27,62 @@ body {
   right: 0.5em;
 }
 
-.logo {
-  height: 50%;
-  max-width: 85%;
-  padding-left: 1em;
-  padding-top: 1em;
-  width: auto;
+.credits-box {
+  background-color: white;
+  display: none;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 80%;
+  margin: auto;
+  padding: 7px;
+  position: relative;
+  top: 7em;
+  width: 22em;
+  z-index: 100;
+}
+
+.close-credits {
+  color: white;
+  cursor: pointer;
+  padding-top: 3px;
+}
+
+.credits-head {
+  background-color: lightgrey;
+  border-radius: 7px;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+.credits-bold {
+  font-size: 14px;
+}
+
+.credits-overlay {
+  /* background-color: #aaa;
+  height: 100%;
+  left: 0;
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #aaa;
+  z-index: 5;
+  opacity: 0.4;
+}
+
+.content {
+  position: absolute;
+  z-index: 10;
+  background: #ccc;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #map {
