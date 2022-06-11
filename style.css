@@ -37,13 +37,7 @@ body {
   position: relative;
   top: 7em;
   width: 22em;
-  z-index: 100;
-}
-
-.close-credits {
-  color: white;
-  cursor: pointer;
-  padding-top: 3px;
+  z-index: 2;
 }
 
 .credits-head {
@@ -57,23 +51,22 @@ body {
   font-size: 14px;
 }
 
+.close-credits {
+  color: black;
+  cursor: pointer;
+  padding-top: 3px;
+}
+
 .credits-overlay {
-  /* background-color: #aaa;
+  background-color: #aaa;
+  display: none;
   height: 100%;
   left: 0;
   opacity: 0.3;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 5; */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #aaa;
-  z-index: 5;
-  opacity: 0.4;
+  z-index: 1;
 }
 
 .content {
