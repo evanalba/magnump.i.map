@@ -30,14 +30,16 @@ body {
 .credits-box {
   background-color: white;
   display: none;
-  font-family: arial, helvetica, sans-serif;
+  font-family: arial, sans-serif;
   font-size: 80%;
+  left: 50%;
   margin: auto;
   padding: 7px;
-  position: relative;
-  top: 7em;
+  position: absolute;
+  top: 30%;
+  transform: translate(-50%, -50%);
   width: 22em;
-  z-index: 2;
+  z-index: 100;
 }
 
 .credits-head {
@@ -66,7 +68,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 50;
 }
 
 .content {
@@ -76,6 +78,106 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.side-panel {
+  position: absolute;
+  background-color: white;
+  height: 90%;
+  width: 18.75em;
+  z-index: 10;
+}
+
+.side-panel-controls {
+  background-color: gray;
+  left: 0;
+  padding: 5px 0;
+  position: absolute;
+  width: 100%;
+}
+
+.side-panel-sliders {
+  color: white;
+  cursor: pointer;
+  padding-left: 7px;
+}
+
+.side-panel-open {
+  color: white;
+  cursor: pointer;
+  float: right;
+  padding-right: 7px;
+}
+
+.side-panel-close {
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+  display: none;
+  padding: 5px 0px 5px 5px;
+  position: absolute;
+  width: 1.5em;
+  z-index: 100;
+}
+
+.legend-panel {
+  display: none;
+  padding-top: 28px;
+}
+
+.legend-table {
+  display: block;
+  font-family: arial, sans-serif;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.legend-header {
+  padding-top: 10px;
+  text-align: left;
+}
+
+.legend-season {
+  font-weight: 400;
+  padding-top: 3px;
+  text-align: left;
+}
+
+.place-panel {
+  background-color: gray;
+  left: 0;
+  padding: 5px 0;
+  position: absolute;
+  top: 1.7em;
+  width: 100%;
+}
+
+.places-search-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  color: gray;
+  font-weight: 700;
+  margin-left: 2em;
+  outline: none;
+  padding: 5px 25px 5px 5px;
+  width: 15em;
+}
+
+.places-search {
+  color: #333333;
+  cursor: pointer;
+  position: absolute;
+  padding: 5px;
+  right: 45px;
+  z-index: 2;
+}
+
+.place-filter {
+  color: white;
+  cursor: pointer;
+  float: right;
+  padding-right: 7px;
+  padding-top: 5px;
 }
 
 #map {
