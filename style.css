@@ -192,7 +192,23 @@ body {
   margin-bottom: 1px 1px 0px 1px;
 }
 
+#home-btn {
+  background-color: white;
+  border-radius: 2px 2px 0 0;
+  border: 1px solid #333333;
+  cursor: pointer;
+  height: 1.65em;
+  line-height: .4em;
+  padding-left: 3px;
+  padding-right: 3px;
+  position: absolute;
+  right: 0.75em;
+  top: 2.3em;
+  width: 1.65em;
+  z-index: 49;
+}
+
 .ol-zoom-out {
   cursor: pointer;
-  margin-top: 0px 1px 1px 1px;
+  margin-top: 1.3em;
 }

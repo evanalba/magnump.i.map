@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('.credits').click(function () {
         $('.credits-overlay').show();
         $('.credits-box').show();
-        // $('.credits-box').css('display')
         $(this).hide();
     });
 
