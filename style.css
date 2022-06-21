@@ -133,8 +133,12 @@ body {
 }
 
 .legend-header {
-  padding-top: 10px;
+  padding-top: 3px;
   text-align: left;
+}
+
+.legend-row {
+  display: block;
 }
 
 .legend-season {
