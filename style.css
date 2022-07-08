@@ -34,7 +34,7 @@ body {
   font-size: 80%;
   left: 50%;
   margin: auto;
-  padding: 7px;
+  padding: 0.4375em;
   position: absolute;
   top: 30%;
   transform: translate(-50%, -50%);
@@ -44,19 +44,19 @@ body {
 
 .credits-head {
   background-color: lightgrey;
-  border-radius: 7px;
-  padding: 4px 6px;
+  border-radius: 0.4375em;
+  padding: 0.25em 0.375em;
   text-align: center;
 }
 
 .credits-bold {
-  font-size: 14px;
+  font-size: 0.875em;
 }
 
 .close-credits {
   color: black;
   cursor: pointer;
-  padding-top: 3px;
+  padding-top: 0.1875em;
 }
 
 .credits-overlay {
@@ -91,7 +91,7 @@ body {
 .side-panel-controls {
   background-color: gray;
   left: 0;
-  padding: 5px 0;
+  padding: 0.3125em 0;
   position: absolute;
   width: 100%;
 }
@@ -99,14 +99,14 @@ body {
 .side-panel-sliders {
   color: white;
   cursor: pointer;
-  padding-left: 7px;
+  padding-left: 0.4375em;
 }
 
 .side-panel-open {
   color: white;
   cursor: pointer;
   float: right;
-  padding-right: 7px;
+  padding-right: 0.4375em;
 }
 
 .side-panel-close {
@@ -114,26 +114,26 @@ body {
   color: white;
   cursor: pointer;
   display: none;
-  padding: 5px 0px 5px 5px;
+  padding: 0.3125em 0em 0.3125em 0.3125em;
   position: absolute;
-  width: 1.5em;
-  z-index: 100;
+  width: 1.25em;
+  z-index: 49;
 }
 
 .legend-panel {
   display: none;
-  padding-top: 28px;
+  padding-top: 1.75em;
 }
 
 .legend-table {
   display: block;
   font-family: arial, sans-serif;
-  height: 100px;
+  height: 6.25em;
   overflow-y: scroll;
 }
 
 .legend-header {
-  padding-top: 3px;
+  padding-top: 0.1875em;
   text-align: left;
 }
 
@@ -143,14 +143,14 @@ body {
 
 .legend-season {
   font-weight: 400;
-  padding-top: 3px;
+  padding-top: 0.1875em;
   text-align: left;
 }
 
 .place-panel {
   background-color: gray;
   left: 0;
-  padding: 5px 0;
+  padding: 0.3125em 0;
   position: absolute;
   top: 1.7em;
   width: 100%;
@@ -158,12 +158,12 @@ body {
 
 .places-search-box {
   border: 1px solid gray;
-  border-radius: 5px;
+  border-radius: 0.3125em;
   color: gray;
   font-weight: 700;
   margin-left: 2em;
   outline: none;
-  padding: 5px 25px 5px 5px;
+  padding: 0.3125em 1.5625em 0.3125em 0.3125em;
   width: 15em;
 }
 
@@ -171,8 +171,8 @@ body {
   color: #333333;
   cursor: pointer;
   position: absolute;
-  padding: 5px;
-  right: 45px;
+  padding: 0.3125em;
+  right: 2.8125em;
   z-index: 2;
 }
 
@@ -180,8 +180,8 @@ body {
   color: white;
   cursor: pointer;
   float: right;
-  padding-right: 7px;
-  padding-top: 5px;
+  padding-right: 0.4375em;
+  padding-top: 0.3125em;
 }
 
 #map {
@@ -193,7 +193,7 @@ body {
 
 .ol-zoom-in {
   cursor: pointer;
-  margin-bottom: 1px 1px 0px 1px;
+  margin-bottom: 0.0625em;
 }
 
 #home-btn {
@@ -203,8 +203,8 @@ body {
   cursor: pointer;
   height: 1.65em;
   line-height: .4em;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 0.1875em;
+  padding-right: 0.1875em;
   position: absolute;
   right: 0.75em;
   top: 2.3em;
