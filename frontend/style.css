@@ -1,0 +1,85 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.banner {
+  background-color: #333333;
+  height: 10%;
+}
+
+.logo {
+  height: 50%;
+  max-width: 60%;
+  padding-left: 1em;
+  padding-top: 1em;
+  width: auto;
+}
+
+.crud-icons {
+  display: flex;
+  gap: 0.3em;
+  justify-content: flex-end;
+  position: fixed;
+  right: 0.5em;
+  top: 1em;
+  z-index: 21;
+}
+
+.crud-icon {
+  color: white;
+  cursor: pointer;
+}
+
+.credits-box {
+  background-color: white;
+  display: none;
+  font-family: arial, sans-serif;
+  font-size: 80%;
+  left: 50%;
+  margin: auto;
+  padding: 0.4375em;
+  position: absolute;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  width: 22em;
+  z-index: 100;
+}
+
+.credits-head {
+  background-color: lightgrey;
+  border-radius: 0.4375em;
+  padding: 0.25em 0.375em;
+  text-align: center;
+}
+
+.credits-bold {
+  font-size: 0.875em;
+}
+
+.close-credits {
+  color: black;
+  cursor: pointer;
+  padding-top: 0.1875em;
+}
+
+.credits-overlay {
+  background-color: #aaa;
+  display: none;
+  height: 100%;
+  left: 0;
+  opacity: 0.3;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+
+#map {
+  bottom: 0;
+  position: absolute;
+  top: 10%;
+  width: 100%;
+}
