@@ -1,0 +1,10 @@
+services:
+  # Spin up React
+  frontend:
+    build: ./frontend
+    container_name: magnum_pi_map_frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/usr/app
+      - /usr/app/node_modules
