@@ -1,4 +1,4 @@
-<p align="center"><img src="" width="400" alt="Magnum P.I. Map Logo"></p>
+<p align="center"><img src="https://github.com/evanalba/magnump.i.map/blob/main/frontend/app/index/logo.svg" width="400" alt="Magnum P.I. Map Logo"></p>
 
 ## About Magnum P.I. Map
 
@@ -9,7 +9,7 @@ TV show location, and more.
 ## Table of Contents
 * [Software Stack](#Software-Stack)
 * [Environment Setup](#Environment-Setup)
-* [License]()
+* [License](https://github.com/evanalba/magnump.i.map/blob/main/LICENSE)
 
 ## Software Stack
 ### PERN
