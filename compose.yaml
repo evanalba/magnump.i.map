@@ -1,13 +1,13 @@
-services:
-  frontend:
-    build:
-      context: ./frontend
-    container_name: magnum_pi_map_frontend
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./frontend:/usr/app
-      - /usr/app/node_modules
-    # command: Overrides the default command specified by the CMD in the Dockerfile. 
-    # Remove dev if you want to be in production mode.
-    command: ["npm", "start", "dev"]
+# services:
+#   frontend:
+#     build:
+#       context: ./frontend
+#     container_name: magnum_pi_map_frontend
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - ./frontend:/usr/app
+#       - /usr/app/node_modules
+#     # command: Overrides the default command specified by the CMD in the Dockerfile. 
+#     # Remove dev if you want to be in production mode.
+#     command: ["npm", "start", "dev"]

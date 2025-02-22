@@ -1,9 +1,0 @@
-https://fontmeme.com/magnum-p-i-font/
-
-Logo Settings:
-
-Font: 65
-Effect: Shadow-L
-Hex: #f6b115
-Color: #000000
-

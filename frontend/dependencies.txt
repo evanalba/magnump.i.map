@@ -1,0 +1,15 @@
+React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Hot Module Replacement (or HMR) - One of the most useful features offered by
+webpack. It allows all kinds of modules to be updated at runtime without the
+need for a full refresh. This page focuses on implementation while the
+concepts page gives more details on how it works and why it's useful.
+
+NOTE: HMR is not intended for use in production, meaning it should only be
+used in development. See the building for production guide for more
+information.
+
+Dependencies List:
+- @vitejs/plugin-react-swc uses SWC for Fast Refresh

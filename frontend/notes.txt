@@ -1,0 +1,32 @@
+https://fontmeme.com/magnum-p-i-font/
+
+Logo Settings:
+
+Font: 65
+Effect: Shadow-L
+Hex: #f6b115
+Color: #000000
+
+
+In React, the public folder contains static files such as
+index.html, javascript library files, images, and other assets, etc. which 
+you don’t want to be processed by Webpack. Files in this folder are copied 
+and pasted as they are directly into the build folder. Files inside the 
+`public` folder can only be referenced from the HTML.
+
+Webpack - A powerful, open-source JavaScript module bundler. Essentially, it
+takes all the different pieces of your web application—JavaScript, CSS,
+images, and more—and packages them into files that can be efficiently used by
+a web browser.   
+
+Module Bundling - Modern web applications are often built using many separate
+JavaScript files (modules). Webpack's primary job is to take these modules and
+their dependencies and combine them into a smaller number of bundled files.
+This reduces the number of HTTP requests a browser needs to make, which speeds
+up page loading.
+
+
+NOTE: The /logo.svg path indicates that Vite should look for the file in the root
+of the project's static assets, which, in Vite's case, is the public folder.
+
+
