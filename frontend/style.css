@@ -17,6 +17,11 @@ body {
   width: auto;
 }
 
+.location-img {
+  max-width: 100%; /* Make image responsive */
+  height: auto;
+}
+
 .crud-icons {
   display: flex;
   gap: 0.3em;
@@ -34,7 +39,8 @@ body {
 
 .credits-box {
   background-color: white;
-  display: none;
+  /* display: none; IMPORTANT: THIS CAN AFFECT THE VISIBILITY WHEN USING REACT! */
+  display: block;
   font-family: arial, sans-serif;
   font-size: 80%;
   left: 50%;
@@ -66,7 +72,7 @@ body {
 
 .credits-overlay {
   background-color: #aaa;
-  display: none;
+  /* display: none; */
   height: 100%;
   left: 0;
   opacity: 0.3;
@@ -76,10 +82,125 @@ body {
   z-index: 50;
 }
 
+.content {
+  position: absolute;
+  z-index: 10;
+  background: #ccc;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.side-panel {
+  position: absolute;
+  background-color: white;
+  height: 90%;
+  width: 18.75em;
+  z-index: 10;
+}
+
+.side-panel-controls {
+  background-color: gray;
+  left: 0;
+  padding: 0.3125em 0;
+  position: absolute;
+  width: 100%;
+}
+
+.side-panel-sliders {
+  color: white;
+  cursor: pointer;
+  padding-left: 0.4375em;
+}
+
+.side-panel-open {
+  color: white;
+  cursor: pointer;
+  float: right;
+  padding-right: 0.4375em;
+}
+
+.side-panel-close {
+  background-color: gray;
+  color: white;
+  cursor: pointer;
+  display: none;
+  padding: 0.3125em 0em 0.3125em 0.3125em;
+  position: absolute;
+  width: 1.25em;
+  z-index: 49;
+}
+
+.legend-panel {
+  display: none;
+  padding-top: 1.75em;
+}
+
+.legend-table {
+  display: block;
+  font-family: arial, sans-serif;
+  height: 6.25em;
+  overflow-y: scroll;
+}
+
+.legend-header {
+  padding-top: 0.1875em;
+  text-align: left;
+}
+
+.legend-row {
+  display: block;
+}
+
+.legend-season {
+  font-weight: 400;
+  padding-top: 0.1875em;
+  text-align: left;
+}
+
+.place-panel {
+  background-color: gray;
+  left: 0;
+  padding: 0.3125em 0;
+  position: absolute;
+  top: 1.7em;
+  width: 100%;
+}
+
+.places-search-box {
+  border: 0.0625em solid gray;
+  border-radius: 0.3125em;
+  color: gray;
+  font-weight: 700;
+  margin-left: 2em;
+  outline: none;
+  padding: 0.3125em 1.5625em 0.3125em 0.3125em;
+  width: 15em;
+}
+
+.places-search {
+  color: #333333;
+  cursor: pointer;
+  position: absolute;
+  padding: 0.3125em;
+  right: 2.8125em;
+  z-index: 2;
+}
+
+.locations-playlist {
+  bottom: 0;
+  font-family: arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  top: 8.8em;
+  width: 18.75em;
+}
 
 #map {
   bottom: 0;
   position: absolute;
   top: 10%;
   width: 100%;
+  z-index: 0;
 }

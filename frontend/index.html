@@ -1,24 +1,10 @@
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html> -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <title>Magnum P.I. Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -32,31 +18,27 @@
 </head>
 
 <body>
-    <!-- banner -->
+    <!-- Banner -->
     <div class="banner">
-        <img class="logo" src="logo.svg" alt="Magnum P.I. Map Logo" width="400" height="36" />
+        <img class="logo" src="/logo.svg" alt="Magnum P.I. Map Logo" width="400" height="36" />
     </div>
     <!-- Crud top right buttons -->
-    <div class="crud-icons">
-        <a href="index.html"><i class="fa-solid fa-house crud-icon"></i></a>
-        <a href="html/create.html"><i class="fa-solid fa-circle-plus crud-icon"></i></a>
-        <a href="html/update.html"><i class="fa-solid fa-circle-check crud-icon"></i></a>
-        <a href="html/delete.html"><i class="fa-solid fa-circle-minus crud-icon"></i></a>
-        <i class="fa-solid fa-circle-info crud-icon"></i>
-    </div>
-    <!-- credits box pop-up  -->
-
-    <!-- side panel -->
-
-    <!-- map -->
+    <!-- Credits box pop-up  -->
+    <!-- Side panel -->
+    <!-- Map -->
     <div id="map"></div>
     <script>
-        var greenIcon = L.icon({
-            iconUrl: '../public/images/magnum-c.png',
-            iconSize: [21, 25]
+
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [21, 25]
+            }
         });
 
-        const  robinNestposition = { lat: 21.324671, lng: -157.680023 };
+        var greenIcon = new LeafIcon({ iconUrl: '/images/magnum-cross.png' });
+
+
+        const robinNestposition = { lat: 21.324671, lng: -157.680023 };
         let map = L.map("map").setView(robinNestposition, 13);
 
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -64,10 +46,31 @@
             attribution:
                 '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         }).addTo(map);
-        
-        L.marker(robinNestposition, {icon: greenIcon}).addTo(map).bindPopup("I am a green leaf.");
+
+        map.zoomControl.setPosition("topright");
+
+
+
+        L.marker(robinNestposition, { icon: greenIcon }).addTo(map).bindPopup(`
+        <h3>Anderson Estate (Pahonu)</h3>
+        <h4>41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795</h4>
+        <img class="location-img" src="/images/locations/robins-nest-full.jpg" alt="Magnum P.I. Map Logo" width="480" height="360" />
+        <p>The setting for Robin's Nest, the beautiful oceanfront Hawaiian estate owned by wealthy novelist Robin Masters.
+            Managed by the British majordomo Jonathan Quayle Higgins III.
+            This property's Hawaiian name is "Pahonu" and for decades
+            it was also referred to as The Anderson Estate (for former owner
+            Eve Glover Anderson, step-daughter of Cox Communications heiress
+            Barbara Cox Anthony).</p>
+        <b>Episode(s):</b>
+        <ul>
+            <li>Almost All</li>
+        </ul>
+
+        `);
 
     </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 
 </html>
