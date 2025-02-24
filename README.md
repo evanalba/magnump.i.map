@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/evanalba/magnump.i.map/blob/main/frontend/app/index/logo.svg" width="400" alt="Magnum P.I. Map Logo"></p>
+<p align="center"><img src="https://github.com/evanalba/magnump.i.map/blob/main/frontend/public/logo.svg" width="400" alt="Magnum P.I. Map Logo"></p>
 
 ## About Magnum P.I. Map
 
