@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../style.css";
+// import "../style.css";
 
 
 function Credits() {
@@ -17,7 +17,7 @@ function Credits() {
     <>
 
       <div className="crud-icons">
-        <a href="index.html">
+        <a href="/">
           <i className="fa-solid fa-house crud-icon" />
         </a>
         <a href="html/create.html">
@@ -32,7 +32,7 @@ function Credits() {
         <i className="fa-solid fa-circle-info crud-icon" onClick={openItem} />
       </div>
 
-      {isCreditsVisible && (
+      {isCreditsVisible == true && (
         <>
           <div className="credits-overlay" />
           <div className="credits-box">
@@ -64,178 +64,201 @@ function Credits() {
 }
 
 
-// function SidePanel() {
-//   const [isLegendVisible, setIsLegendVisible] = useState(false);
-//   const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
+function SidePanel() {
+  const [isLegendVisible, setIsLegendVisible] = useState(false);
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
 
-//   const toggleLegend = () => {
-//     setIsLegendVisible(!isLegendVisible);
-//   };
+  const toggleLegend = () => {
+    if (isLegendVisible == false) {
+      setIsLegendVisible(true);
+    } else {
+      setIsLegendVisible(false);
+    }
+  };
 
-//   const toggleSidePanel = () => {
-//     setIsSidePanelOpen(!isSidePanelOpen);
-//   };
+  const toggleSidePanel = () => {
+    if (isSidePanelOpen == false) {
+      setIsSidePanelOpen(true);
+    } else {
+      setIsSidePanelOpen(false);
+    }
+  };
 
-//   const placePanelStyle = {
-//     marginTop: isLegendVisible ? '6.25em' : '0em',
-//   };
+  function getPlacePanelStyle(isLegendVisible) {
+    let placePanelStyle = {};
+    if (isLegendVisible) {
+      placePanelStyle.marginTop = '6.25em';
+    } else {
+      placePanelStyle.marginTop = '0em';
+    }
+    return placePanelStyle;
+  }
+  
+  function getLocationsPlaylistStyle(isLegendVisible) {
+    let locationsPlaylistStyle = {};
+    if (isLegendVisible) {
+      locationsPlaylistStyle.top = '14.88em';
+    } else {
+      locationsPlaylistStyle.top = '8.64em';
+    }
+    return locationsPlaylistStyle;
+  }
+  
+  const placePanelStyle = getPlacePanelStyle(isLegendVisible);
+  const locationsPlaylistStyle = getLocationsPlaylistStyle(isLegendVisible);
 
-//   const locationsPlaylistStyle = {
-//     top: isLegendVisible ? '15em' : '8.75em',
-//   };
-
-//   return (
-//     <>
-//       {isSidePanelOpen && (
-//         <div className="side-panel">
-//           <div className="side-panel-controls">
-//             <i
-//               className="fa-solid fa-sliders side-panel-sliders"
-//               onClick={toggleLegend}
-//             ></i>
-//             <i
-//               className="fa-solid fa-arrow-left side-panel-open"
-//               onClick={toggleSidePanel}
-//             ></i>
-//           </div>
-//           {isLegendVisible && (
-//             <div className="legend-panel">
-//               <table className="legend-table">
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="../public/images/magnum-cross.png"
-//                       alt="Magnum P.I."
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <th className="legend-header">Magnum P.I. Seasons</th>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/1/season_1_marker.png"
-//                       alt="Magnum P.I. Season 1 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season One</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/2/season_2_marker.png"
-//                       alt="Magnum P.I. Season 2 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Two</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/3/season_3_marker.png"
-//                       alt="Magnum P.I. Season 3 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Three</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/4/season_4_marker.png"
-//                       alt="Magnum P.I. Season 4 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Four</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/5/season_5_marker.png"
-//                       alt="Magnum P.I. Season 5 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Five</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/6/season_6_marker.png"
-//                       alt="Magnum P.I. Season 6 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Six</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/7/season_7_marker.png"
-//                       alt="Magnum P.I. Season 7 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Seven</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/8/season_8_marker.png"
-//                       alt="Magnum P.I. Season 8 Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Season Eight</td>
-//                 </tr>
-//                 <tr className="legend-row">
-//                   <td>
-//                     <img
-//                       src="public/images/markers/1/season_1_mixed.png"
-//                       alt="Magnum P.I. Mixed Season Marker"
-//                       width="21"
-//                       height="25"
-//                     />
-//                   </td>
-//                   <td className="legend-season">Example: Season 1 + Season 2</td>
-//                 </tr>
-//               </table>
-//             </div>
-//           )}
-//           <div className="place-panel" style={placePanelStyle}>
-//             <input
-//               className="places-search-box"
-//               type="text"
-//               placeholder="Search places list"
-//             />
-//             <i className="fa-solid fa-magnifying-glass places-search"></i>
-//           </div>
-//           <div className="locations-playlist" style={locationsPlaylistStyle}>
-//             <table className="locations-table"></table>
-//           </div>
-//         </div>
-//       )}
-//       {!isSidePanelOpen && (
-//         <i
-//           className="fa-solid fa-arrow-right side-panel-close"
-//           onClick={toggleSidePanel}
-//         ></i>
-//       )}
-//     </>
-//   );
-// }
+  return (
+    <>
+      {isSidePanelOpen == true && (
+        <div className="side-panel">
+          <div className="side-panel-controls">
+            <i
+              className="fa-solid fa-sliders side-panel-sliders"
+              onClick={toggleLegend}
+            ></i>
+            <i
+              className="fa-solid fa-arrow-left side-panel-open"
+              onClick={toggleSidePanel}
+            ></i>
+          </div>
+          {isLegendVisible == true && (
+            <div className="legend-panel">
+              <table className="legend-table">
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="../public/images/magnum-cross.png"
+                      alt="Magnum P.I."
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <th className="legend-header">Magnum P.I. Seasons</th>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/1/season_1_marker.png"
+                      alt="Magnum P.I. Season 1 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season One</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/2/season_2_marker.png"
+                      alt="Magnum P.I. Season 2 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Two</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/3/season_3_marker.png"
+                      alt="Magnum P.I. Season 3 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Three</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/4/season_4_marker.png"
+                      alt="Magnum P.I. Season 4 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Four</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/5/season_5_marker.png"
+                      alt="Magnum P.I. Season 5 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Five</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/6/season_6_marker.png"
+                      alt="Magnum P.I. Season 6 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Six</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/7/season_7_marker.png"
+                      alt="Magnum P.I. Season 7 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Seven</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/8/season_8_marker.png"
+                      alt="Magnum P.I. Season 8 Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Season Eight</td>
+                </tr>
+                <tr className="legend-row">
+                  <td>
+                    <img
+                      src="public/images/markers/1/season_1_mixed.png"
+                      alt="Magnum P.I. Mixed Season Marker"
+                      width="21"
+                      height="25"
+                    />
+                  </td>
+                  <td className="legend-season">Example: Season 1 & Season 2</td>
+                </tr>
+              </table>
+            </div>
+          )}
+          <div className="place-panel" style={placePanelStyle}>
+            <input
+              className="places-search-box"
+              type="text"
+              placeholder="Search places list"
+            />
+            <i className="fa-solid fa-magnifying-glass places-search"></i>
+          </div>
+          <div className="locations-playlist" style={locationsPlaylistStyle}>
+            <table className="locations-table"></table>
+          </div>
+        </div>
+      )}
+      {isSidePanelOpen == false && (
+        <i
+          className="fa-solid fa-arrow-right side-panel-close"
+          onClick={toggleSidePanel}
+        ></i>
+      )}
+    </>
+  );
+}
 
 
 function App() {
@@ -243,28 +266,11 @@ function App() {
 
   return (
     <>
-      {/* banner */}
-      {/* <div className="banner">
-        <img
-          className="logo"
-          src="../public/logo.svg"
-          alt="Magnum P.I. Map Logo"
-          width={400}
-          height={36}
-        />
-      </div> */}
-
       {/* credits box pop-up  */}
-      <div>
-        <Credits />
-      </div>
+      <Credits />
 
       {/* side panel */}
-      {/* <SidePanel /> */}
-      {/* <div>
-        <p>Add a little style!</p>
-        <img src="../public/images/locations/robins-nest-full.jpg" alt="" />
-      </div> */}
+      <SidePanel />
     </>
   );
 }

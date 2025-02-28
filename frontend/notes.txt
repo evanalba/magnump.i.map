@@ -28,3 +28,5 @@ up page loading.
 
 NOTE: The /logo.svg path indicates that Vite should look for the file in the root
 of the project's static assets, which, in Vite's case, is the public folder.
+
+docker exec -it magnum_pi_map_postgres psql -U myuser -d mydb
