@@ -42,7 +42,7 @@
     </p>
   </div> -->
   <!-- Add form -->
-  <!-- <div>
+  <div>
     <img class="add-image" src="../images/pages/add-png.png" alt="Magnum P.I. Add a Location Image" width="988" height="92">
     <form id="full-add-form" action="" method="post" class="add-form">
       <div class="add-form">
@@ -108,8 +108,15 @@
         <input class="submit-button" type="submit" value="Submit"/>
       </div>      
     </form>
-  </div> -->
+  </div>
   <div id="add-root"></div>
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
   <script type="module" src="../../src/add-main.jsx"></script>
 </body>
 
