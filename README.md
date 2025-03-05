@@ -22,6 +22,7 @@ TV show location, and more.
 1. Install [Docker](https://www.docker.com/).
 2. Clone this repository and navigate to it:
     ```bash
+    git clone https://github.com/evanalba/magnump.i.map.git && cd magnump.i.map
     ```
 3. Build the Multi-stage build.
     ```bash
