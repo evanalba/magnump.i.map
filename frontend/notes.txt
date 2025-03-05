@@ -7,6 +7,17 @@ Effect: Shadow-L
 Hex: #f6b115
 Color: #000000
 
+https://www.pngtosvg.com/
+
+IMPORTANT: Font Family Used as 'helvetica' in this project:
+https://font.download/font/helvetica-255
+
+
+
+Font Family Used in Magnum P.I.:
+https://www.artofthetitle.com/title/magnum-pi/
+https://magnum-mania.com/Forum/viewtopic.php?t=3727
+https://dafontonline.com/serpentine-font/
 
 In React, the public folder contains static files such as
 index.html, javascript library files, images, and other assets, etc. which 
@@ -29,4 +40,9 @@ up page loading.
 NOTE: The /logo.svg path indicates that Vite should look for the file in the root
 of the project's static assets, which, in Vite's case, is the public folder.
 
-docker exec -it magnum_pi_map_postgres psql -U myuser -d mydb
+docker exec -it frontend bash
+docker exec -it postgres psql -U myuser -d mydb
+
+Test if Postgresql is working command:
+
+docker exec postgres pg_isready -t 90

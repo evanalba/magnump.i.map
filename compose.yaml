@@ -2,7 +2,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    container_name: magnum_pi_map_frontend
+    container_name: frontend
     ports:
       - '3000:3000'
     volumes:
@@ -11,3 +11,21 @@ services:
     # command: Overrides the default command specified by the CMD in the Dockerfile. 
     # Remove dev if you want to be in production mode.
     command: ["npm", "run", "dev"]
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15 # Package Version Supported based on Debian Version.
+    container_name: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:

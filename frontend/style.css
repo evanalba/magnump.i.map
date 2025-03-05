@@ -1,3 +1,7 @@
+@import url("public/css/fonts.css");
+@import url("public/css/navbar.css");
+
+
 html,
 body {
   height: 100%;
@@ -20,75 +24,6 @@ body {
 .location-img {
   max-width: 100%; /* Make image responsive */
   height: auto;
-}
-
-.crud-icons {
-  display: flex;
-  gap: 0.3em;
-  justify-content: flex-end;
-  position: fixed;
-  right: 0.5em;
-  top: 1em;
-  z-index: 21;
-}
-
-.crud-icon {
-  color: white;
-  cursor: pointer;
-}
-
-.credits-box {
-  background-color: white;
-  /* display: none; IMPORTANT: THIS CAN AFFECT THE VISIBILITY WHEN USING REACT! */
-  display: block;
-  font-family: arial, sans-serif;
-  font-size: 80%;
-  left: 50%;
-  margin: auto;
-  padding: 0.4375em;
-  position: absolute;
-  top: 30%;
-  transform: translate(-50%, -50%);
-  width: 22em;
-  z-index: 100;
-}
-
-.credits-head {
-  background-color: lightgrey;
-  border-radius: 0.4375em;
-  padding: 0.25em 0.375em;
-  text-align: center;
-}
-
-.credits-bold {
-  font-size: 0.875em;
-}
-
-.close-credits {
-  color: black;
-  cursor: pointer;
-  padding-top: 0.1875em;
-}
-
-.credits-overlay {
-  background-color: #aaa;
-  /* display: none; */
-  height: 100%;
-  left: 0;
-  opacity: 0.3;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 50;
-}
-
-.content {
-  position: absolute;
-  z-index: 10;
-  background: #ccc;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .side-panel {

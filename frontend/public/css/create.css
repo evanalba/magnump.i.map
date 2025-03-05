@@ -1,0 +1,48 @@
+@import url("fonts.css");
+@import url("navbar.css");
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.banner {
+  background-color: #333333;
+  height: 10%;
+}
+
+.logo {
+  height: 50%;
+  max-width: 60%;
+  padding-left: 1em;
+  padding-top: 1em;
+  width: auto;
+}
+
+.add-image {
+  display: block;
+  height: 5%;
+  margin: 1em auto 1em auto;
+  max-width: 60%;
+  width: auto;
+}
+
+form.form-example {
+  display: table;
+}
+
+div.form-example {
+  display: table-row;
+}
+
+.add-form {
+  text-align: center;
+}
+
+.add-input {
+  width: 65%;
+}
+
+
+  
