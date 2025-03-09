@@ -2,7 +2,7 @@ import { useState } from "react";
 // import "../style.css";
 
 
-function Credits() {
+export function Credits() {
   const [isCreditsVisible, setIsCreditsVisible] = useState(false);
 
   function closeItem() {
@@ -20,13 +20,13 @@ function Credits() {
         <a href="/">
           <i className="fa-solid fa-house crud-icon" />
         </a>
-        <a href="html/add.html">
+        <a href="/html/add.html">
           <i className="fa-solid fa-circle-plus crud-icon" />
         </a>
-        <a href="html/update.html">
+        <a href="/html/update.html">
           <i className="fa-solid fa-circle-check crud-icon" />
         </a>
-        <a href="html/delete.html">
+        <a href="/html/remove.html">
           <i className="fa-solid fa-circle-minus crud-icon" />
         </a>
         <i className="fa-solid fa-circle-info crud-icon" onClick={openItem} />

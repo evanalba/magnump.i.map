@@ -1,0 +1,10 @@
+@import url("fonts.css");
+@import url("navbar.css");
+
+.update-image {
+  display: block;
+  height: 5%;
+  margin: 1em auto 1em auto;
+  max-width: 60%;
+  width: auto;
+}

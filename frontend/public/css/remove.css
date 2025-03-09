@@ -1,0 +1,37 @@
+@import url("fonts.css");
+@import url("navbar.css");
+
+.remove-image {
+  display: block;
+  height: 5%;
+  margin: 1em auto 1em auto;
+  max-width: 60%;
+  width: auto;
+}
+
+.delete-all-button {
+  background-color: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 0.75em auto;
+}
+
+.remove-table {
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+.delete-button {
+  background-color: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 0 0.75em 0 0.75em;
+}

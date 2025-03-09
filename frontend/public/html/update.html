@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/update.css">
+  <title>Magnum P.I. Map</title>
+  <!-- import Font Awesome -->
+  <script src="https://kit.fontawesome.com/0d646bf8f0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- banner -->
+  <div class="banner">
+    <img class="logo" src="/logo.svg" alt="Magnum P.I. Map Logo" width="1146" height="109">
+  </div>
+  <!-- Crud top right buttons -->
+  <!-- credits box pop-up  -->
+  <!-- Update form -->
+  <div>
+    <img class="update-image" src="../images/pages/update-png.png" alt="Magnum P.I. Update a Location Image" width="1146" height="109">
+    <!-- <form id="full-update-form" action="" method="post" class="update-form">
+    </form> -->
+  </div>
+  <div id="update-root"></div>
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
+  <script type="module" src="../../src/pages/update/update-main.jsx"></script>
+</body>
+
+</html>

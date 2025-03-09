@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/remove.css">
+  <title>Magnum P.I. Map</title>
+  <!-- import Font Awesome -->
+  <script src="https://kit.fontawesome.com/0d646bf8f0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="banner">
+    <img class="logo" src="/logo.svg" alt="Magnum P.I. Map Logo" width="1189" height="110">
+  </div>
+  <!-- Crud top right buttons -->
+  <!-- credits box pop-up  -->
+  <!-- Remove form -->
+  <div>
+    <img class="remove-image" src="../images/pages/remove-png.png" alt="Magnum P.I. Remove a Location Image" width="1191" height="92">
+    <button class="delete-all-button">Delete all Locations</button>
+    <form action="" method="delete">
+      <table class="remove-table">
+        <th>Location Name</th>
+        <th>Delete</th>
+      </table>
+    </form>
+  </div>
+  <div id="remove-root"></div>
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
+  <script type="module" src="../../src/pages/remove/remove-main.jsx"></script>
+</body>
+
+</html>

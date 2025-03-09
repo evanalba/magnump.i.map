@@ -2,6 +2,25 @@
  * For the Crud Icons and Credits Box.
  */
 
+ html,
+ body {
+   height: 100%;
+   margin: 0;
+ }
+
+.banner {
+  background-color: #333333;
+  height: 10%;
+}
+
+.logo {
+  height: 50%;
+  max-width: 60%;
+  padding-left: 1em;
+  padding-top: 1em;
+  width: auto;
+}
+
 .crud-icons {
   display: flex;
   gap: 0.3em;
