@@ -37,12 +37,38 @@ This reduces the number of HTTP requests a browser needs to make, which speeds
 up page loading.
 
 
+IMPORTANT: React is primarily used to build single-page applications (SPAs),
+meaning a web application that loads a single HTML page and dynamically
+updates its content based on user interaction, without needing to reload the
+entire page each time.
+
+React routing is for "navigating to different pages" on that SPA.
+
+NOTE: Best Practice may vary on wether you want to build the whole project with
+just React code OR a mix of React and static html pages. 
+Do NOT go overkill with react for small-medium projects probably.
+
 NOTE: The /logo.svg path indicates that Vite should look for the file in the root
 of the project's static assets, which, in Vite's case, is the public folder.
 
 docker exec -it frontend bash
-docker exec -it postgres psql -U myuser -d mydb
+docker exec -it postgres psql -U myuser -d magnum
 
 Test if Postgresql is working command:
 
 docker exec postgres pg_isready -t 90
+
+To see ports being used by Docker Compose:
+docker compose ps
+
+Reason why it is not a good idea to store images in a database (use urls instead):
+https://qr.ae/pY6foI 
+
+Example: If your table is named "locations", the correct query would be:
+
+SELECT * FROM public.locations;
+
+Which ECMAScript standard to use? ES 6 best one right now:
+https://caniuse.com/?search=es6
+
+Original Source: https://262.ecma-international.org/6.0/

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="../css/add.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Magnum P.I. Map</title>
   <!-- import Font Awesome -->
   <script src="https://kit.fontawesome.com/0d646bf8f0.js" crossorigin="anonymous"></script>
@@ -16,83 +15,217 @@
 <body>
   <!-- banner -->
   <div class="banner">
-    <img class="logo" src="/logo.svg"  alt="Magnum P.I. Map Logo" width="400" height="36" />
+    <img class="logo" src="/logo.svg" alt="Magnum P.I. Map Logo" width="400" height="36" />
   </div>
   <!-- Crud top right buttons -->
   <!-- credits box pop-up  -->
   <!-- Add form -->
   <div>
-    <img class="add-image" src="../images/pages/add-png.png" alt="Magnum P.I. Add a Location Image" width="988" height="92">
+    <img class="add-image" src="../images/pages/add-png.png" alt="Magnum P.I. Add a Location Image" width="988"
+      height="92">
     <form id="full-add-form" action="" method="post" class="add-form">
       <div class="add-form">
-        <label>Enter the name of the location:</label>
+        <label>The name of the location:</label>
         <br>
         <input id="location-name" class="add-input" type="text" required>
       </div>
       <br>
       <div class="add-form">
-        <label>Enter the location's latitude:</label>
+        <label>Latitude:</label>
         <br>
         <input id="location-latitude" class="add-input" type="number" required>
       </div>
       <br>
       <div class="add-form">
-        <label>Enter the location's longitude:</label>
+        <label>Longitude:</label>
         <br>
         <input id="location-longitude" class="add-input" type="number" required>
       </div>
       <br>
       <div class="add-form">
-        <label>Upload the location's image (JPG Format accepted only):</label>
+        <label>Enter the location's image URL (JPG format accepted only):</label>
+        <br><br>
+        <input class="add-input" type="url" id="image-upload" name="image" required>
+        <span id="image-error" style="color: red;"></span>
+      </div>
+
+      <script>
+        document.getElementById('image-upload').addEventListener('change', function () {
+          const url = this.value;
+          const errorSpan = document.getElementById('image-error');
+
+          if (url && (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg'))) {
+            errorSpan.textContent = '';
+            this.setCustomValidity('');
+          } else {
+            errorSpan.textContent = 'URL must end with .jpg or .jpeg';
+            this.setCustomValidity('URL must end with .jpg or .jpeg');
+          }
+        });
+      </script>
+      <br>
+      <div class="add-form">
+        <label>Add some information about the location:</label>
         <br>
-        <br>
-        <input type="file" id="image-upload" name="image" accept="image/jpeg" required>
+        <textarea id="location-description" name="information" class="add-input" rows="6" required></textarea>
+      </div>
+      <br>
+      <div class="add-form">
+        <style>
+          #keyValueTable {
+            display: none;
+            /* Initially hidden */
+            margin-top: 1.25em;
+            border-collapse: collapse;
+            width: 100%;
+          }
+
+          #keyValueTable th,
+          #keyValueTable td {
+            border: 1px solid #ddd;
+            padding: 0.5em;
+            text-align: left;
+          }
+
+          #keyValueTable th {
+            background-color: #f2f2f2;
+          }
+
+          #keyValueTable input[type="text"] {
+            width: 100%;
+            padding: 0.3125em;
+            box-sizing: border-box;
+          }
+        </style>
+        <label for="selection">The location was featured in:</label>
+        <select id="selection" required>
+          <option value="">-- Select --</option>
+          <option value="option1">Selected Episode(s)</option>
+          <option value="option2">Custom</option>
+        </select>
+
+        <table id="keyValueTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Magnum Mania Episode URL</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><label><input type="text" class="name-input" name="name[]" autocomplete="name"></label></td>
+              <td><label><input type="text" class="url-input" name="url[]" autocomplete="url"></label></td>
+              <td><button onclick="removeRow(this)">Remove</button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3"><button onclick="addRow()">Add Row</button></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div id="inputArea" style="display: none;">
+          <br>
+          <label for="textAreaInput">Custom Episode Information:</label><br>
+          <textarea style="width: 50%;" id="textAreaInput" name="urls"></textarea>
+        </div>
+
+        <script>
+          // import validator from 'validator';
+          const selectionDropdown = document.getElementById('selection');
+          const keyValueTable = document.getElementById('keyValueTable');
+          const inputArea = document.getElementById('inputArea');
+          const tableBody = keyValueTable.querySelector('tbody');
+
+          selectionDropdown.addEventListener('change', function () {
+            if (this.value === 'option1') {
+              keyValueTable.style.display = 'table';
+              inputArea.style.display = 'none';
+            } else if (this.value === 'option2') {
+              keyValueTable.style.display = 'none';
+              inputArea.style.display = 'block';
+            } else {
+              keyValueTable.style.display = 'none';
+              inputArea.style.display = 'none';
+            }
+          });
+
+          function addRow() {
+            const newRow = tableBody.insertRow();
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+
+            cell1.innerHTML = '<label><input type="text" class="name-input" name="name[]" autocomplete="name"></label';
+            cell2.innerHTML = '<label><input type="text" class="url-input" name="url[]" autocomplete="url"></label>';
+            cell3.innerHTML = '<button onclick="removeRow(this)">Remove</button>';
+          }
+
+          function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+          }
+
+          // Add form submission handling
+          document.querySelector('form').addEventListener('submit', function (event) {
+            if (selectionDropdown.value === 'option2') {
+              const urlInputs = document.querySelectorAll('.url-input');
+              urlInputs.forEach(input => {
+                if (!isValidUrl(input.value)) {
+                  alert('URLs are required for Option 2.');
+                  event.preventDefault(); // Prevent form submission
+                }
+              });
+            }
+          });
+
+          function isValidUrl(url) {
+            // TODO: Add Validator.js!
+
+            // validator.isURL(url, { protocols: ['http','https','ftp'] })
+            try {
+              new URL(url);
+              return true;
+              // return validator.isURL(url, { protocols: ['http','https'] });
+            } catch (_) {
+              return false;
+            }
+          }
+        </script>
       </div>
       <br>
       <div class="add-form">
         <label>Checkbox the season(s) this location appeared on:</label>
         <br>
-        <input id="season-one" type="checkbox">
-        <label>Season 1</label>
+        <label>Season 1 <input id="season-one" type="checkbox"></label>
         <br>
-        <input id="season-two" type="checkbox">
-        <label>Season 2</label>
+        <label>Season 2 <input id="season-two" type="checkbox"></label>
         <br>
-        <input id="season-three" type="checkbox">
-        <label>Season 3</label>
+        <label>Season 3 <input id="season-three" type="checkbox"></label>
         <br>
-        <input id="season-four" type="checkbox">
-        <label>Season 4</label>
+        <label>Season 4 <input id="season-four" type="checkbox"></label>
         <br>
-        <input id="season-five" type="checkbox">
-        <label>Season 5</label>
+        <label>Season 5 <input id="season-five" type="checkbox"></label>
         <br>
-        <input id="season-six" type="checkbox">
-        <label>Season 6</label>
+        <label>Season 6 <input id="season-six" type="checkbox"></label>
         <br>
-        <input id="season-seven" type="checkbox">
-        <label>Season 7</label>
+        <label>Season 7 <input id="season-seven" type="checkbox"></label>
         <br>
-        <input id="season-eight" type="checkbox">
-        <label>Season 8</label>
+        <label>Season 8 <input id="season-eight" type="checkbox"></label>
       </div>
       <br>
       <div class="add-form">
-        <label>Optional: Add some information about the location:</label>
-        <br>
-        <textarea id="location-description" name="information" class="add-input" rows="6"></textarea>
+        <input class="submit-button" type="submit" value="Submit" />
       </div>
-      <br>
-      <div class="add-form">
-        <input class="submit-button" type="submit" value="Submit"/>
-      </div>      
     </form>
   </div>
   <div id="add-root"></div>
   <script type="module">
     import RefreshRuntime from 'http://localhost:3000/@react-refresh'
     RefreshRuntime.injectIntoGlobalHook(window)
-    window.$RefreshReg$ = () => {}
+    window.$RefreshReg$ = () => { }
     window.$RefreshSig$ = () => (type) => type
     window.__vite_plugin_react_preamble_installed__ = true
   </script>
