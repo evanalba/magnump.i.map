@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import "../style.css";
-
 
 export function Credits() {
   const [isCreditsVisible, setIsCreditsVisible] = useState(false);
@@ -15,7 +14,6 @@ export function Credits() {
 
   return (
     <>
-
       <div className="crud-icons">
         <a href="/">
           <i className="fa-solid fa-house crud-icon" />
@@ -42,17 +40,17 @@ export function Credits() {
               </span>
               <i
                 className="fa-solid fa-circle-xmark close-credits"
-                style={{ float: 'right' }}
+                style={{ float: "right" }}
                 onClick={closeItem}
               />
             </div>
             <p>
-              This Magnum P.I. map was created by{' '}
-              <a href="https://www.evanalba.com/">Evan Alba</a>. All the
-              Magnum P.I. television series referenced here on this map are
-              copyrighted. You can view the source code for this map{' '}
-              <a href="https://github.com/evanalba/magnump.i.map">here</a>. Also,
-              I would like to give credit to{' '}
+              This Magnum P.I. map was created by{" "}
+              <a href="https://www.evanalba.com/">Evan Alba</a>. All the Magnum
+              P.I. television series referenced here on this map are
+              copyrighted. You can view the source code for this map{" "}
+              <a href="https://github.com/evanalba/magnump.i.map">here</a>.
+              Also, I would like to give credit to{" "}
               <a href="https://magnum-mania.com/">Magnum Mania</a> for helping
               me by providing the locations in Magnum P.I..
             </p>
@@ -63,10 +61,32 @@ export function Credits() {
   );
 }
 
-
 function SidePanel() {
   const [isLegendVisible, setIsLegendVisible] = useState(false);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
+  const [locations, setLocations] = useState([]); // State to store locations
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredLocations, setFilteredLocations] = useState([]);
+
+  useEffect(() => {
+    // Fetch locations when the component mounts
+    fetch("http://localhost:8080/api/locations")
+      .then((response) => response.json())
+      .then((data) => {
+        setLocations(data); // Store the fetched data in state
+      })
+      .catch((error) => {
+        console.error("Error fetching locations:", error);
+      });
+  }, []); // Empty dependency array means this runs once on mount
+
+  useEffect(() => {
+    // Filter locations based on searchQuery
+    const filtered = locations.filter((location) =>
+      location.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredLocations(filtered);
+  }, [searchQuery, locations]); // Re-run when searchQuery or locations changes
 
   const toggleLegend = () => {
     if (isLegendVisible == false) {
@@ -84,26 +104,30 @@ function SidePanel() {
     }
   };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   function getPlacePanelStyle(isLegendVisible) {
     let placePanelStyle = {};
     if (isLegendVisible) {
-      placePanelStyle.marginTop = '6.25em';
+      placePanelStyle.marginTop = "6.25em";
     } else {
-      placePanelStyle.marginTop = '0em';
+      placePanelStyle.marginTop = "0em";
     }
     return placePanelStyle;
   }
-  
+
   function getLocationsPlaylistStyle(isLegendVisible) {
     let locationsPlaylistStyle = {};
     if (isLegendVisible) {
-      locationsPlaylistStyle.top = '14.88em';
+      locationsPlaylistStyle.top = "14.88em";
     } else {
-      locationsPlaylistStyle.top = '8.64em';
+      locationsPlaylistStyle.top = "8.64em";
     }
     return locationsPlaylistStyle;
   }
-  
+
   const placePanelStyle = getPlacePanelStyle(isLegendVisible);
   const locationsPlaylistStyle = getLocationsPlaylistStyle(isLegendVisible);
 
@@ -232,7 +256,9 @@ function SidePanel() {
                       height="25"
                     />
                   </td>
-                  <td className="legend-season">Example: Season 1 & Season 2</td>
+                  <td className="legend-season">
+                    Example: Season 1 & Season 2
+                  </td>
                 </tr>
               </table>
             </div>
@@ -242,11 +268,25 @@ function SidePanel() {
               className="places-search-box"
               type="text"
               placeholder="Search places list"
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
             <i className="fa-solid fa-magnifying-glass places-search"></i>
           </div>
           <div className="locations-playlist" style={locationsPlaylistStyle}>
-            <table className="locations-table"></table>
+            <table className="locations-table">
+              <tbody>
+                {filteredLocations.map(
+                  (
+                    location // Use filteredLocations here
+                  ) => (
+                    <tr key={location.id} className="locations-row">
+                      <td className="locations-name">{location.name}</td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       )}
@@ -259,7 +299,6 @@ function SidePanel() {
     </>
   );
 }
-
 
 function App() {
   // const [count, setCount] = useState(0);

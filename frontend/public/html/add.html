@@ -29,17 +29,24 @@
         <br>
         <input id="location-name" class="add-input" type="text" required>
       </div>
+      <!-- 'location-address' -->
+      <br>
+      <div class="add-form">
+        <label>The address of the location:</label>
+        <br>
+        <input id="location-address" class="add-input" type="text" required>
+      </div>
       <br>
       <div class="add-form">
         <label>Latitude:</label>
         <br>
-        <input id="location-latitude" class="add-input" type="number" required>
+        <input id="location-latitude" class="add-input" required>
       </div>
       <br>
       <div class="add-form">
         <label>Longitude:</label>
         <br>
-        <input id="location-longitude" class="add-input" type="number" required>
+        <input id="location-longitude" class="add-input" required>
       </div>
       <br>
       <div class="add-form">
@@ -49,20 +56,20 @@
         <span id="image-error" style="color: red;"></span>
       </div>
 
-      <script>
-        document.getElementById('image-upload').addEventListener('change', function () {
-          const url = this.value;
-          const errorSpan = document.getElementById('image-error');
+      <!-- <script>
+        // document.getElementById('image-upload').addEventListener('change', function () {
+        //   const url = this.value;
+        //   const errorSpan = document.getElementById('image-error');
 
-          if (url && (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg'))) {
-            errorSpan.textContent = '';
-            this.setCustomValidity('');
-          } else {
-            errorSpan.textContent = 'URL must end with .jpg or .jpeg';
-            this.setCustomValidity('URL must end with .jpg or .jpeg');
-          }
-        });
-      </script>
+        //   if (url && (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg'))) {
+        //     errorSpan.textContent = '';
+        //     this.setCustomValidity('');
+        //   } else {
+        //     errorSpan.textContent = 'URL must end with .jpg or .jpeg';
+        //     this.setCustomValidity('URL must end with .jpg or .jpeg');
+        //   }
+        // });
+      </script> -->
       <br>
       <div class="add-form">
         <label>Add some information about the location:</label>
@@ -152,6 +159,19 @@
             }
           });
 
+          document.getElementById('image-upload').addEventListener('change', function () {
+            const url = this.value;
+            const errorSpan = document.getElementById('image-error');
+
+            if (url && (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg'))) {
+              errorSpan.textContent = '';
+              this.setCustomValidity('');
+            } else {
+              errorSpan.textContent = 'URL must end with .jpg or .jpeg';
+              this.setCustomValidity('URL must end with .jpg or .jpeg');
+            }
+          });
+
           function addRow() {
             const newRow = tableBody.insertRow();
             const cell1 = newRow.insertCell(0);
@@ -169,16 +189,84 @@
           }
 
           // Add form submission handling
+          // Form submission handling
           document.querySelector('form').addEventListener('submit', function (event) {
-            if (selectionDropdown.value === 'option2') {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect form data
+            const locationName = document.getElementById('location-name').value;
+            const locationAddress = document.getElementById('location-address').value;
+            const locationLatitude = parseFloat(document.getElementById('location-latitude').value);
+            const locationLongitude = parseFloat(document.getElementById('location-longitude').value);
+            const imageUrl = document.getElementById('image-upload').value;
+            const locationDescription = document.getElementById('location-description').value;
+            const selection = document.getElementById('selection').value;
+            let episodes = {};
+            let seasons = [];
+
+            if (selection === 'option1') {
+              const nameInputs = document.querySelectorAll('.name-input');
               const urlInputs = document.querySelectorAll('.url-input');
-              urlInputs.forEach(input => {
-                if (!isValidUrl(input.value)) {
-                  alert('URLs are required for Option 2.');
-                  event.preventDefault(); // Prevent form submission
+
+              nameInputs.forEach((nameInput, index) => {
+                if (nameInput.value && urlInputs[index].value) {
+                  episodes[nameInput.value] = urlInputs[index].value;
                 }
               });
+            } else if (selection === 'option2') {
+              const textAreaInput = document.getElementById('textAreaInput').value;
+              // Parse custom episode information from the text area if needed.
+              // You might need to split the text by lines or commas and create an object.
+              // For example:
+              // textAreaInput.split('\n').forEach(line => {
+              //   const [name, url] = line.split(',');
+              //   if (name && url) {
+              //     episodes[name.trim()] = url.trim();
+              //   }
+              // });
+              episodes = textAreaInput;
             }
+
+            const seasonCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            seasonCheckboxes.forEach((checkbox, index) => {
+              if (checkbox.checked) {
+                seasons.push(index + 1);
+              }
+            });
+
+            // Create data object
+            const data = {
+              name: locationName,
+              address: locationAddress,
+              latitude: locationLatitude,
+              longitude: locationLongitude,
+              image: imageUrl,
+              biography: locationDescription,
+              episodes: JSON.stringify(episodes),
+              seasons: seasons,
+            };
+            console.log(data)
+
+            // Send POST request
+            fetch('http://localhost:8080/api/locations', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => response.json())
+              .then((responseData) => {
+                // Handle success (e.g., show a message)
+                console.log('Location added:', responseData);
+                alert("Location Added!");
+                document.getElementById("full-add-form").reset();
+              })
+              .catch((error) => {
+                // Handle error (e.g., show an error message)
+                console.error('Error adding location:', error);
+                alert("Error adding location!");
+              });
           });
 
           function isValidUrl(url) {

@@ -55,6 +55,16 @@ docker exec -it frontend bash
 docker exec -it postgres psql -U myuser -d mydb
 docker exec -it postgres psql -h 127.0.0.1 -p 5432 -U myuser -d mydb
 
+To Access PGAdmin CSV files one:
+
+docker ps
+docker exec -it magnumpimap-pgadmin-1 bash
+
+NOTE: admin_pgadmin.com is the email account of pgadmin4!!
+
+/var/lib/pgadmin/storage/admin_pgadmin.com
+
+
 Test if Postgresql is working command:
 
 docker exec postgres pg_isready -t 90
