@@ -201,7 +201,7 @@
             const imageUrl = document.getElementById('image-upload').value;
             const locationDescription = document.getElementById('location-description').value;
             const selection = document.getElementById('selection').value;
-            let episodes = {};
+            let episodes = [];
             let seasons = [];
 
             if (selection === 'option1') {
@@ -210,20 +210,23 @@
 
               nameInputs.forEach((nameInput, index) => {
                 if (nameInput.value && urlInputs[index].value) {
-                  episodes[nameInput.value] = urlInputs[index].value;
+                    episodes.push({
+                        key: nameInput.value,
+                        value: urlInputs[index].value
+                    }); // Add key-value object to the array
                 }
-              });
+            });
             } else if (selection === 'option2') {
               const textAreaInput = document.getElementById('textAreaInput').value;
               // Parse custom episode information from the text area if needed.
               // You might need to split the text by lines or commas and create an object.
               // For example:
-              // textAreaInput.split('\n').forEach(line => {
-              //   const [name, url] = line.split(',');
-              //   if (name && url) {
-              //     episodes[name.trim()] = url.trim();
-              //   }
-              // });
+              textAreaInput.split('\n').forEach(line => {
+                const [name, url] = line.split(',');
+                if (name && url) {
+                  episodes[name.trim()] = url.trim();
+                }
+              });
               episodes = textAreaInput;
             }
 

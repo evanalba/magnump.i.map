@@ -68,15 +68,15 @@
                 data.forEach(location => {
                     // Build the episodes list dynamically
             let episodesList = '';
-            if (location.episodes && typeof location.episodes === 'object') {
-                for (const episodeTitle in location.episodes) {
-                    if (location.episodes.hasOwnProperty(episodeTitle)) {
-                        const episodeUrl = location.episodes[episodeTitle];
-                        episodesList += `<li><a href="${episodeUrl}" target="_blank">${episodeTitle}</a></li>`;
-                    }
+            if (location.episodes && Array.isArray(location.episodes)) {
+                    // Handle array of key-value pairs
+                    location.episodes.forEach(episode => {
+                        episodesList += `<li><a href="${episode.value}" target="_blank">${episode.key}</a></li>`;
+                    });
+                } else if (location.episodes && typeof location.episodes === 'string') {
+                    // Handle plain string from text area
+                    episodesList = `<li>${location.episodes}</li>`;
                 }
-            }
-
                     L.marker([location.latitude, location.longitude], { icon: getSeasonIcon(location.seasons, location.name) }).addTo(map).bindPopup(`
                         <h3>${location.name}</h3>
                         <h4>${location.address}</h4>
