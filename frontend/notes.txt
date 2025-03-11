@@ -52,7 +52,8 @@ NOTE: The /logo.svg path indicates that Vite should look for the file in the roo
 of the project's static assets, which, in Vite's case, is the public folder.
 
 docker exec -it frontend bash
-docker exec -it postgres psql -U myuser -d magnum
+docker exec -it postgres psql -U myuser -d mydb
+docker exec -it postgres psql -h 127.0.0.1 -p 5432 -U myuser -d mydb
 
 Test if Postgresql is working command:
 

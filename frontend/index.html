@@ -49,8 +49,39 @@
 
         map.zoomControl.setPosition("topright");
 
+         // Fetch data from your API
+         fetch('http://localhost:8080/api/locations')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(location => {
+                    // Build the episodes list dynamically
+            let episodesList = '';
+            if (location.episodes && typeof location.episodes === 'object') {
+                for (const episodeTitle in location.episodes) {
+                    if (location.episodes.hasOwnProperty(episodeTitle)) {
+                        const episodeUrl = location.episodes[episodeTitle];
+                        episodesList += `<li><a href="${episodeUrl}" target="_blank">${episodeTitle}</a></li>`;
+                    }
+                }
+            }
 
+                    L.marker([location.latitude, location.longitude], { icon: greenIcon }).addTo(map).bindPopup(`
+                        <h3>${location.name}</h3>
+                        <h4>${location.address}</h4>
+                        <img class="location-img" src="${location.image}" alt="${location.name} Image" width="480" height="360" />
+                        <p>${location.biography}</p>
+                        <b>Episode(s):</b>
+                        <ul>
+                            ${episodesList}
+                        </ul>
+                    `);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
 
+        // Add the initial Robin's Nest marker
         L.marker(robinNestposition, { icon: greenIcon }).addTo(map).bindPopup(`
             <h3>Anderson Estate (Pahonu)</h3>
             <h4>41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795</h4>
@@ -70,6 +101,7 @@
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-</body>
+</body> 
+
 
 </html>

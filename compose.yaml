@@ -12,7 +12,10 @@ services:
     # Remove dev if you want to be in production mode.
     command: ["npm", "run", "dev"]
     depends_on:
-      - postgres
+      # - postgres
+      - backend
+    networks:
+      - my-network
 
   postgres:
     image: postgres:15 # Package Version Supported based on Debian Version.
@@ -26,6 +29,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
+    networks:
+      - my-network
 
   # Source: https://anasdidi.dev/articles/200713-docker-compose-postgres/
   # If connection refused: https://stackoverflow.com/questions/53610385/docker-postgres-and-pgadmin-4-connection-refused
@@ -41,7 +46,26 @@ services:
       - pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
+    networks:
+      - my-network
+  
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./backend:/usr/src
+      # - /usr/src/node_modules
+    depends_on:
+      - postgres
+    #   - pgadmin
+    networks:
+      - my-network
 
 volumes:
   postgres_data:
   pgadmin:
+
+networks:
+  my-network:
