@@ -40,9 +40,45 @@
         // Define Season Marker icons
         var seasonOneIcon = new LeafIcon({ iconUrl: '/images/markers/1/season_1_marker.png' });
 
+
+        var seasonTwoIcon = new LeafIcon({ iconUrl: '/images/markers/2/season_2_marker.png' });
+
+
+        var seasonThreeIcon = new LeafIcon({ iconUrl: '/images/markers/3/season_3_marker.png' });
+
+        
+        var seasonFourIcon = new LeafIcon({ iconUrl: '/images/markers/4/season_4_marker.png' });
+
+
+        var seasonFiveIcon = new LeafIcon({ iconUrl: '/images/markers/5/season_5_marker.png' });
+
+
+        var seasonSixIcon = new LeafIcon({ iconUrl: '/images/markers/6/season_6_marker.png' });
+
+
+        var seasonSevenIcon = new LeafIcon({ iconUrl: '/images/markers/7/season_7_marker.png' });
+
+
+        var seasonEightIcon = new LeafIcon({ iconUrl: '/images/markers/8/season_8_marker.png' });
+
+
         function getSeasonIcon(seasons, location) {
             if (seasons.includes(1)) {
                 return seasonOneIcon;
+            } else if (seasons.includes(2)) {
+                return seasonTwoIcon;
+            } else if (seasons.includes(3)) {
+                return seasonThreeIcon;
+            } else if (seasons.includes(4)) {
+                return seasonFourIcon;
+            } else if (seasons.includes(5)) {
+                return seasonFiveIcon;
+            } else if (seasons.includes(6)) {
+                return seasonSixIcon;
+            } else if (seasons.includes(7)) {
+                return seasonSevenIcon;
+            } else if (seasons.includes(8)) {
+                return seasonEightIcon;
             } else {
                 console.error(`ERROR: Your ${location.toUpperCase()} seasons icon is not valid. Make sure your seasons array has at least one valid season element.`);
                 return origIcon;

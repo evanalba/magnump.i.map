@@ -162,7 +162,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/1/season_1_marker.png"
+                      src="images/markers/single/season_1_marker.png"
                       alt="Magnum P.I. Season 1 Marker"
                       width="21"
                       height="25"
@@ -173,7 +173,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/2/season_2_marker.png"
+                      src="images/markers/single/season_2_marker.png"
                       alt="Magnum P.I. Season 2 Marker"
                       width="21"
                       height="25"
@@ -184,7 +184,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/3/season_3_marker.png"
+                      src="images/markers/single/season_3_marker.png"
                       alt="Magnum P.I. Season 3 Marker"
                       width="21"
                       height="25"
@@ -195,7 +195,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/4/season_4_marker.png"
+                      src="images/markers/single/season_4_marker.png"
                       alt="Magnum P.I. Season 4 Marker"
                       width="21"
                       height="25"
@@ -206,7 +206,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/5/season_5_marker.png"
+                      src="images/markers/single/season_5_marker.png"
                       alt="Magnum P.I. Season 5 Marker"
                       width="21"
                       height="25"
@@ -217,7 +217,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/6/season_6_marker.png"
+                      src="images/markers/single/season_6_marker.png"
                       alt="Magnum P.I. Season 6 Marker"
                       width="21"
                       height="25"
@@ -228,7 +228,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/7/season_7_marker.png"
+                      src="images/markers/single/season_7_marker.png"
                       alt="Magnum P.I. Season 7 Marker"
                       width="21"
                       height="25"
@@ -239,7 +239,7 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/8/season_8_marker.png"
+                      src="images/markers/single/season_8_marker.png"
                       alt="Magnum P.I. Season 8 Marker"
                       width="21"
                       height="25"
@@ -250,14 +250,14 @@ function SidePanel() {
                 <tr className="legend-row">
                   <td>
                     <img
-                      src="images/markers/1/season_1_mixed.png"
-                      alt="Magnum P.I. Mixed Season Marker"
+                      src="images/markers/double/season_1_2.png"
+                      alt="Magnum P.I. Marker of Seasons 1 and 2."
                       width="21"
                       height="25"
                     />
                   </td>
                   <td className="legend-season">
-                    Example: Season 1 & Season 2
+                    Example: Season 1 and Season 2
                   </td>
                 </tr>
               </table>
