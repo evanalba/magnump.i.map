@@ -67,6 +67,8 @@ function SidePanel() {
   const [locations, setLocations] = useState([]); // State to store locations
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLocations, setFilteredLocations] = useState([]);
+  const [clickDisabled, setClickDisabled] = useState(false); // State to track click delay
+
 
   useEffect(() => {
     // Fetch locations when the component mounts
@@ -282,8 +284,13 @@ function SidePanel() {
                   ) => (
                     <tr key={location.id} className="locations-row">
                       <td className="locations-name"   onClick={() => {
+                      if (clickDisabled) {
+                        return;
+                      }
                   
-                      map.flyTo({ lat: location.latitude, lng: location.longitude });
+                      setClickDisabled(true);
+
+                      map.flyTo( { lat: location.latitude, lng: location.longitude } );
 
                       map.eachLayer((layer) => {
                         if (
@@ -298,7 +305,9 @@ function SidePanel() {
                       // After flyTo completes, move the map up slightly.
                       setTimeout(() => {
                         const currentCenter = map.getCenter();
+                        // console.log(currentCenter);
                         map.setView([currentCenter.lat + 0.05, currentCenter.lng], map.getZoom());
+                        setClickDisabled(false); // Re-enable clicks after the delay
                       }, 1500); // Match the flyTo duration or slightly longer 
 
                       }}>{location.name}</td>
