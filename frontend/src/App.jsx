@@ -281,7 +281,27 @@ function SidePanel() {
                     location // Use filteredLocations here
                   ) => (
                     <tr key={location.id} className="locations-row">
-                      <td className="locations-name">{location.name}</td>
+                      <td className="locations-name"   onClick={() => {
+                  
+                      map.flyTo({ lat: location.latitude, lng: location.longitude });
+
+                      map.eachLayer((layer) => {
+                        if (
+                          layer instanceof L.Marker &&
+                          layer.getLatLng().lat === location.latitude &&
+                          layer.getLatLng().lng === location.longitude
+                        ) {
+                          layer.openPopup();
+                        }
+                      });
+
+                      // After flyTo completes, move the map up slightly.
+                      setTimeout(() => {
+                        const currentCenter = map.getCenter();
+                        map.setView([currentCenter.lat + 0.05, currentCenter.lng], map.getZoom());
+                      }, 1500); // Match the flyTo duration or slightly longer 
+
+                      }}>{location.name}</td>
                     </tr>
                   )
                 )}

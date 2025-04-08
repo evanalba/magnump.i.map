@@ -38,28 +38,28 @@
         var origIcon = new LeafIcon({ iconUrl: '/images/magnum-cross.png' });
 
         // Define Season Marker icons
-        var seasonOneIcon = new LeafIcon({ iconUrl: '/images/markers/1/season_1_marker.png' });
+        var seasonOneIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_1_marker.png' });
 
 
-        var seasonTwoIcon = new LeafIcon({ iconUrl: '/images/markers/2/season_2_marker.png' });
+        var seasonTwoIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_2_marker.png' });
 
 
-        var seasonThreeIcon = new LeafIcon({ iconUrl: '/images/markers/3/season_3_marker.png' });
+        var seasonThreeIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_3_marker.png' });
 
         
-        var seasonFourIcon = new LeafIcon({ iconUrl: '/images/markers/4/season_4_marker.png' });
+        var seasonFourIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_4_marker.png' });
 
 
-        var seasonFiveIcon = new LeafIcon({ iconUrl: '/images/markers/5/season_5_marker.png' });
+        var seasonFiveIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_5_marker.png' });
 
 
-        var seasonSixIcon = new LeafIcon({ iconUrl: '/images/markers/6/season_6_marker.png' });
+        var seasonSixIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_6_marker.png' });
 
 
-        var seasonSevenIcon = new LeafIcon({ iconUrl: '/images/markers/7/season_7_marker.png' });
+        var seasonSevenIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_7_marker.png' });
 
 
-        var seasonEightIcon = new LeafIcon({ iconUrl: '/images/markers/8/season_8_marker.png' });
+        var seasonEightIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_8_marker.png' });
 
 
         function getSeasonIcon(seasons, location) {
@@ -130,21 +130,21 @@
             });
 
         // Add the initial Robin's Nest marker
-        L.marker(robinNestposition, { icon: origIcon }).addTo(map).bindPopup(`
-            <h3>Anderson Estate (Pahonu)</h3>
-            <h4>41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795</h4>
-            <img class="location-img" src="/images/locations/robins-nest-full.jpg" alt="Magnum P.I. Map Logo" width="480" height="360" />
-            <p>The setting for Robin's Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
-                Managed by the British majordomo Jonathan Quayle Higgins III.
-                This property's Hawaiian name is "Pahonu" and for decades
-                it was also referred to as The Anderson Estate (for former owner
-                Eve Glover Anderson, step-daughter of Cox Communications heiress
-                Barbara Cox Anthony).</p>
-            <b>Episode(s):</b>
-            <ul>
-                <li>Almost All</li>
-            </ul>
-        `);
+        // L.marker(robinNestposition, { icon: origIcon }).addTo(map).bindPopup(`
+        //     <h3>Anderson Estate (Pahonu)</h3>
+        //     <h4>41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795</h4>
+        //     <img class="location-img" src="/images/locations/robins-nest-full.jpg" alt="Magnum P.I. Map Logo" width="480" height="360" />
+        //     <p>The setting for Robin's Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
+        //         Managed by the British majordomo Jonathan Quayle Higgins III.
+        //         This property's Hawaiian name is "Pahonu" and for decades
+        //         it was also referred to as The Anderson Estate (for former owner
+        //         Eve Glover Anderson, step-daughter of Cox Communications heiress
+        //         Barbara Cox Anthony).</p>
+        //     <b>Episode(s):</b>
+        //     <ul>
+        //         <li>Almost All</li>
+        //     </ul>
+        // `);
 
     </script>
     <div id="root"></div>
