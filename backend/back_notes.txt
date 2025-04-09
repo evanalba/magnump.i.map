@@ -2,3 +2,43 @@ Node-postgres is a collection of node.js modules for interfacing with your
 PostgreSQL database:
 https://node-postgres.com/
 
+
+select * from locations;
+
+TRUNCATE TABLE public.locations;
+
+INSERT INTO public.locations (name, address, latitude, longitude, image, biography, episodes, seasons)
+VALUES (
+    'Ala Moana Beach Park',
+    '1201 Ala Moana Blvd, Honolulu, HI 96814',
+    21.28873,
+    -157.84826,
+    'https://magnum-mania.com/images/5_18_y.jpg',
+    'Home to the McCoy Pavilion, is currently used for special events. Also, it is right next to Magic Island where many cultural events are held.',
+    '{
+        "Round and Around (6.6)": "https://magnum-mania.com/Episodes/Season6/Round_and_Around.html",
+        "Let Me Hear the Music (5.18)": "https://magnum-mania.com/Episodes/Season5/Let_Me_Hear_the_Music.html",
+        "The Treasure of Kalaniopu''u (6.9)": "https://magnum-mania.com/Episodes/Season6/The_Treasure_of_Kalaniopuu.html"
+    }',
+    '{5,6}'
+);
+
+
+INSERT INTO public.locations (name, address, latitude, longitude, image, biography, episodes, seasons)
+VALUES (
+    'Anderson Estate (Pahonu)',
+    '1201 Ala Moana Blvd, Honolulu, HI 96814',
+    21.324671,
+    -157.680023,
+    '41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795',
+    'The setting for Robin''s Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
+                Managed by the British majordomo Jonathan Quayle Higgins III.
+                This property''s Hawaiian name is "Pahonu" and for decades
+                it was also referred to as The Anderson Estate (for former owner
+                Eve Glover Anderson, step-daughter of Cox Communications heiress
+                Barbara Cox Anthony).',
+    '{
+        "Almost All": ""
+    }',
+    '{1,2,3,4,5,6,7,8}'
+);

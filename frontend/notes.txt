@@ -79,6 +79,27 @@ Example: If your table is named "locations", the correct query would be:
 
 SELECT * FROM public.locations;
 
+TRUNCATE TABLE public.locations;
+
+INSERT INTO public.locations (name, address, latitude, longitude, image, biography, episodes, seasons)
+VALUES (
+    'Ala Moana Beach Park',
+    '1201 Ala Moana Blvd, Honolulu, HI 96814',
+    21.28873,
+    -157.84826,
+    'https://magnum-mania.com/images/5_18_y.jpg',
+    'Home to the McCoy Pavilion, is currently used for special events. Also, it is right next to Magic Island where many cultural events are held.',
+    '{
+        "Round and Around (6.6)": "https://magnum-mania.com/Episodes/Season6/Round_and_Around.html",
+        "Let Me Hear the Music (5.18)": "https://magnum-mania.com/Episodes/Season5/Let_Me_Hear_the_Music.html",
+        "The Treasure of Kalaniopu''u (6.9)": "https://magnum-mania.com/Episodes/Season6/The_Treasure_of_Kalaniopuu.html"
+    }',
+    '{5,6}'
+);
+
+
+docker cp locations.csv magnumpimap-pgadmin-1:/var/lib/pgadmin/storage/admin_pgadmin.com
+
 Which ECMAScript standard to use? ES 6 best one right now:
 https://caniuse.com/?search=es6
 

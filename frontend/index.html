@@ -27,7 +27,7 @@
     <!-- Side panel -->
     <!-- Map -->
     <div id="map"></div>
-    <script>
+    <script type="module">
 
         var LeafIcon = L.Icon.extend({
             options: {
@@ -46,7 +46,7 @@
 
         var seasonThreeIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_3_marker.png' });
 
-        
+
         var seasonFourIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_4_marker.png' });
 
 
@@ -61,24 +61,52 @@
 
         var seasonEightIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_8_marker.png' });
 
+        function isSorted(arr) {
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < arr[i - 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function get_seasons_file_name(seasons) {
+            let fileName = '';
+            for (let i = 0; i < seasons.length; i++) {
+                fileName += `_${seasons[i]}`
+            }
+            return fileName;
+        }
 
         function getSeasonIcon(seasons, location) {
-            if (seasons.includes(1)) {
-                return seasonOneIcon;
-            } else if (seasons.includes(2)) {
-                return seasonTwoIcon;
-            } else if (seasons.includes(3)) {
-                return seasonThreeIcon;
-            } else if (seasons.includes(4)) {
-                return seasonFourIcon;
-            } else if (seasons.includes(5)) {
-                return seasonFiveIcon;
-            } else if (seasons.includes(6)) {
-                return seasonSixIcon;
-            } else if (seasons.includes(7)) {
-                return seasonSevenIcon;
-            } else if (seasons.includes(8)) {
-                return seasonEightIcon;
+            if (isSorted(seasons) === false) {
+                seasons.sort();
+            }
+ 
+            let iconPath = '/images/markers/'
+            if (seasons.length === 1) {
+                iconPath += 'single'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            } else if (seasons.length === 2) {
+                iconPath += 'double'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            } else if (seasons.length === 3) {
+                iconPath += 'triple'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            } else if (seasons.length === 4) {
+                iconPath += 'quadruple'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            }  else if (seasons.length === 5) {
+                iconPath += 'quintuple'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            } else if (seasons.length === 6) {
+                iconPath += 'sextuple'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            } else if (seasons.length === 7) {
+                iconPath += 'septuple'
+                return new LeafIcon({ iconUrl: iconPath + '/season' + get_seasons_file_name(seasons) + '.png' });
+            }  else if (seasons.length === 8) {
+                return new LeafIcon({ iconUrl: '/images/markers/octuple/season_1_2_3_4_5_6_7_8.png' });
             } else {
                 console.error(`ERROR: Your ${location.toUpperCase()} seasons icon is not valid. Make sure your seasons array has at least one valid season element.`);
                 return origIcon;
@@ -97,22 +125,20 @@
 
         map.zoomControl.setPosition("topright");
 
-         // Fetch data from your API
-         fetch('http://localhost:8080/api/locations')
+        // Fetch data from your API
+        fetch('http://localhost:8080/api/locations')
             .then(response => response.json())
             .then(data => {
                 data.forEach(location => {
-                    // Build the episodes list dynamically
-            let episodesList = '';
-            if (location.episodes && Array.isArray(location.episodes)) {
-                    // Handle array of key-value pairs
-                    location.episodes.forEach(episode => {
-                        episodesList += `<li><a href="${episode.value}" target="_blank">${episode.key}</a></li>`;
-                    });
-                } else if (location.episodes && typeof location.episodes === 'string') {
-                    // Handle plain string from text area
-                    episodesList = `<li>${location.episodes}</li>`;
-                }
+                    let episodesList = '';
+                    // console.log(typeof location.episodes);
+                    for (const [key, value] of Object.entries(location.episodes)) {
+                        if (value !== "") {
+                            episodesList += `<li><a href="${value}" target="_blank">${key}</a></li>`;
+                        } else {
+                            episodesList += `<li>${key}</li>`;
+                        }
+                    }
                     L.marker([location.latitude, location.longitude], { icon: getSeasonIcon(location.seasons, location.name) }).addTo(map).bindPopup(`
                         <h3>${location.name}</h3>
                         <h4>${location.address}</h4>
@@ -122,7 +148,7 @@
                         <ul>
                             ${episodesList}
                         </ul>
-                    `);
+                    `,);
                 });
             })
             .catch(error => {
@@ -134,12 +160,12 @@
         //     <h3>Anderson Estate (Pahonu)</h3>
         //     <h4>41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795</h4>
         //     <img class="location-img" src="/images/locations/robins-nest-full.jpg" alt="Magnum P.I. Map Logo" width="480" height="360" />
-        //     <p>The setting for Robin's Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
-        //         Managed by the British majordomo Jonathan Quayle Higgins III.
-        //         This property's Hawaiian name is "Pahonu" and for decades
-        //         it was also referred to as The Anderson Estate (for former owner
-        //         Eve Glover Anderson, step-daughter of Cox Communications heiress
-        //         Barbara Cox Anthony).</p>
+        // <p>The setting for Robin's Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
+        //     Managed by the British majordomo Jonathan Quayle Higgins III.
+        //     This property's Hawaiian name is "Pahonu" and for decades
+        //     it was also referred to as The Anderson Estate (for former owner
+        //     Eve Glover Anderson, step-daughter of Cox Communications heiress
+        //     Barbara Cox Anthony).</p>
         //     <b>Episode(s):</b>
         //     <ul>
         //         <li>Almost All</li>
@@ -149,7 +175,7 @@
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-</body> 
+</body>
 
 
 </html>
