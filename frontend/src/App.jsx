@@ -61,6 +61,76 @@ export function Credits() {
   );
 }
 
+function isSorted(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < arr[i - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function get_seasons_file_name(seasons) {
+  let fileName = "";
+  for (let i = 0; i < seasons.length; i++) {
+    fileName += `_${seasons[i]}`;
+  }
+  return fileName;
+}
+
+function getSeasonIcon(seasons, location) {
+  if (isSorted(seasons) === false) {
+    seasons.sort();
+  }
+
+  let iconPath = "/images/markers/";
+  if (seasons.length === 1) {
+    iconPath += "single";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 2) {
+    iconPath += "double";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 3) {
+    iconPath += "triple";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 4) {
+    iconPath += "quadruple";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 5) {
+    iconPath += "quintuple";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 6) {
+    iconPath += "sextuple";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 7) {
+    iconPath += "septuple";
+    return new LeafIcon({
+      iconUrl: iconPath + "/season" + get_seasons_file_name(seasons) + ".png",
+    });
+  } else if (seasons.length === 8) {
+    return new LeafIcon({
+      iconUrl: "/images/markers/octuple/season_1_2_3_4_5_6_7_8.png",
+    });
+  } else {
+    console.error(
+      `ERROR: Your ${location.toUpperCase()} seasons icon is not valid. Make sure your seasons array has at least one valid season element.`
+    );
+    return new LeafIcon({ iconUrl: "/images/magnum-cross.png" });
+  }
+}
+
 function SidePanel() {
   const [isLegendVisible, setIsLegendVisible] = useState(false);
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(true);
@@ -68,7 +138,6 @@ function SidePanel() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [clickDisabled, setClickDisabled] = useState(false); // State to track click delay
-
 
   useEffect(() => {
     // Fetch locations when the component mounts
@@ -132,6 +201,60 @@ function SidePanel() {
 
   const placePanelStyle = getPlacePanelStyle(isLegendVisible);
   const locationsPlaylistStyle = getLocationsPlaylistStyle(isLegendVisible);
+
+  function isSorted(arr) {
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < arr[i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function get_seasons_file_name(seasons) {
+    let fileName = "";
+    for (let i = 0; i < seasons.length; i++) {
+      fileName += `_${seasons[i]}`;
+    }
+    return fileName;
+  }
+
+  function getSeasonIcon(seasons, location) {
+    if (isSorted(seasons) === false) {
+      seasons.sort();
+    }
+
+    let iconPath = "images/markers/";
+    if (seasons.length === 1) {
+      iconPath += "single";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 2) {
+      iconPath += "double";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 3) {
+      iconPath += "triple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 4) {
+      iconPath += "quadruple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 5) {
+      iconPath += "quintuple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 6) {
+      iconPath += "sextuple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 7) {
+      iconPath += "septuple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    } else if (seasons.length === 8) {
+      iconPath +=  "octuple";
+      return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
+    }
+    console.error(
+      `ERROR: Your ${location.toUpperCase()} is not valid in your side panel.`
+    );
+    return "";
+  }
 
   return (
     <>
@@ -283,34 +406,52 @@ function SidePanel() {
                     location // Use filteredLocations here
                   ) => (
                     <tr key={location.id} className="locations-row">
-                      <td className="locations-name"   onClick={() => {
-                      if (clickDisabled) {
-                        return;
-                      }
-                  
-                      setClickDisabled(true);
+                      <td>
+                        <img
+                          src={getSeasonIcon(location.seasons, location.name)}
+                          alt="Magnum P.I. Season 8 Marker"
+                          width="21"
+                          height="25"
+                        />
+                      </td>
+                      <td
+                        className="locations-name"
+                        onClick={() => {
+                          if (clickDisabled) {
+                            return;
+                          }
 
-                      map.flyTo( { lat: location.latitude, lng: location.longitude } );
+                          setClickDisabled(true);
 
-                      map.eachLayer((layer) => {
-                        if (
-                          layer instanceof L.Marker &&
-                          layer.getLatLng().lat === location.latitude &&
-                          layer.getLatLng().lng === location.longitude
-                        ) {
-                          layer.openPopup();
-                        }
-                      });
+                          map.flyTo({
+                            lat: location.latitude,
+                            lng: location.longitude,
+                          });
 
-                      // After flyTo completes, move the map up slightly.
-                      setTimeout(() => {
-                        const currentCenter = map.getCenter();
-                        // console.log(currentCenter);
-                        map.setView([currentCenter.lat + 0.05, currentCenter.lng], map.getZoom());
-                        setClickDisabled(false); // Re-enable clicks after the delay
-                      }, 1500); // Match the flyTo duration or slightly longer 
+                          map.eachLayer((layer) => {
+                            if (
+                              layer instanceof L.Marker &&
+                              layer.getLatLng().lat === location.latitude &&
+                              layer.getLatLng().lng === location.longitude
+                            ) {
+                              layer.openPopup();
+                            }
+                          });
 
-                      }}>{location.name}</td>
+                          // After flyTo completes, move the map up slightly.
+                          setTimeout(() => {
+                            const currentCenter = map.getCenter();
+                            // console.log(currentCenter);
+                            map.setView(
+                              [currentCenter.lat + 0.05, currentCenter.lng],
+                              map.getZoom()
+                            ); // TMP: Helps adjust postion so it can show the marker header at least after I fly to a given marker's center postion.
+                            setClickDisabled(false); // Re-enable clicks after the delay
+                          }, 1500); // Match the flyTo duration or slightly longer
+                        }}
+                      >
+                        {location.name}
+                      </td>
                     </tr>
                   )
                 )}

@@ -30,7 +30,7 @@ VALUES (
     '1201 Ala Moana Blvd, Honolulu, HI 96814',
     21.324671,
     -157.680023,
-    '41-505 Kalanianaʻole Hwy, Waimanalo, HI 96795',
+    'https://magnum-mania.com/images/robins_nest_full.jpg',
     'The setting for Robin''s Nest, the beautiful oceanfront Hawaiian estate owned by the wealthy novelist Robin Masters.
                 Managed by the British majordomo Jonathan Quayle Higgins III.
                 This property''s Hawaiian name is "Pahonu" and for decades
@@ -42,3 +42,6 @@ VALUES (
     }',
     '{1,2,3,4,5,6,7,8}'
 );
+
+-- {1,2,3,4,5,6,7,8}
+
