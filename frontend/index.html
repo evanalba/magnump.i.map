@@ -35,32 +35,6 @@
             }
         });
 
-        var origIcon = new LeafIcon({ iconUrl: '/images/magnum-cross.png' });
-
-        // Define Season Marker icons
-        var seasonOneIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_1_marker.png' });
-
-
-        var seasonTwoIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_2_marker.png' });
-
-
-        var seasonThreeIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_3_marker.png' });
-
-
-        var seasonFourIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_4_marker.png' });
-
-
-        var seasonFiveIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_5_marker.png' });
-
-
-        var seasonSixIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_6_marker.png' });
-
-
-        var seasonSevenIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_7_marker.png' });
-
-
-        var seasonEightIcon = new LeafIcon({ iconUrl: '/images/markers/single/season_8_marker.png' });
-
         function isSorted(arr) {
             for (let i = 1; i < arr.length; i++) {
                 if (arr[i] < arr[i - 1]) {
@@ -109,7 +83,7 @@
                 return new LeafIcon({ iconUrl: '/images/markers/octuple/season_1_2_3_4_5_6_7_8.png' });
             } else {
                 console.error(`ERROR: Your ${location.toUpperCase()} seasons icon is not valid. Make sure your seasons array has at least one valid season element.`);
-                return origIcon;
+                return new LeafIcon({ iconUrl: '/images/magnum-cross.png' });;
             }
         }
 
