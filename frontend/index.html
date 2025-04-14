@@ -104,10 +104,23 @@
             .then(response => response.json())
             .then(data => {
                 data.forEach(location => {
+
+                    const episodesArray = Object.entries(location.episodes);
+
+                    // Good practice: Optional Chaining ?.
+                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+                    episodesArray.sort((a, b) => {
+                        const floatA = parseFloat(a[0].match(/\((\d+\.\d+)\)/)?.[1]);
+                        const floatB = parseFloat(b[0].match(/\((\d+\.\d+)\)/)?.[1]);
+                        if (isNaN(floatA) || isNaN(floatB)) {
+                            return 0; // ERROR: Their relative order in the sorted array will remain unchanged.
+                        }
+                        return floatA - floatB;
+                    });
+
                     let episodesList = '';
-                    // console.log(typeof location.episodes);
-                    for (const [key, value] of Object.entries(location.episodes)) {
-                        if (value !== "") {
+                    for (const [key, value] of episodesArray) {
+                        if (value && value.trim() !== "") {
                             episodesList += `<li><a href="${value}" target="_blank">${key}</a></li>`;
                         } else {
                             episodesList += `<li>${key}</li>`;

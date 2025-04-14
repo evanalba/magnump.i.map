@@ -2,7 +2,7 @@ Node-postgres is a collection of node.js modules for interfacing with your
 PostgreSQL database:
 https://node-postgres.com/
 
-
+Kahala
 select * from locations;
 
 TRUNCATE TABLE public.locations;
@@ -14,7 +14,7 @@ VALUES (
     21.28873,
     -157.84826,
     'https://magnum-mania.com/images/5_18_y.jpg',
-    'Home to the McCoy Pavilion, is currently used for special events. Also, it is right next to Magic Island where many cultural events are held.',
+    'Home to the McCoy Pavilion, which is currently used for special events. Also, it is right next to Magic Island where many cultural events are held.',
     '{
         "Round and Around (6.6)": "https://magnum-mania.com/Episodes/Season6/Round_and_Around.html",
         "Let Me Hear the Music (5.18)": "https://magnum-mania.com/Episodes/Season5/Let_Me_Hear_the_Music.html",
@@ -22,7 +22,6 @@ VALUES (
     }',
     '{5,6}'
 );
-
 
 INSERT INTO public.locations (name, address, latitude, longitude, image, biography, episodes, seasons)
 VALUES (
@@ -45,3 +44,8 @@ VALUES (
 
 -- {1,2,3,4,5,6,7,8}
 
+UPDATE public.locations
+SET biography = 'Your new updated biography here. Replace this with the desired text.'
+WHERE name = 'Ala Moana Beach Park';
+
+EASIER: Or you can simply click on the textbox in pgadmin GUI to update it.

@@ -144,7 +144,10 @@ function SidePanel() {
     fetch("http://localhost:8080/api/locations")
       .then((response) => response.json())
       .then((data) => {
-        setLocations(data); // Store the fetched data in state
+        const sortedLocations = data.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setLocations(sortedLocations); // Store the sorted data in state
       })
       .catch((error) => {
         console.error("Error fetching locations:", error);
@@ -247,7 +250,7 @@ function SidePanel() {
       iconPath += "septuple";
       return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
     } else if (seasons.length === 8) {
-      iconPath +=  "octuple";
+      iconPath += "octuple";
       return iconPath + "/season" + get_seasons_file_name(seasons) + ".png";
     }
     console.error(
@@ -273,118 +276,120 @@ function SidePanel() {
           {isLegendVisible == true && (
             <div className="legend-panel">
               <table className="legend-table">
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="../images/magnum-cross.png"
-                      alt="Magnum P.I."
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <th className="legend-header">Magnum P.I. Seasons</th>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_1.png"
-                      alt="Magnum P.I. Season 1 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season One</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_2.png"
-                      alt="Magnum P.I. Season 2 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Two</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_3.png"
-                      alt="Magnum P.I. Season 3 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Three</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_4.png"
-                      alt="Magnum P.I. Season 4 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Four</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_5.png"
-                      alt="Magnum P.I. Season 5 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Five</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_6.png"
-                      alt="Magnum P.I. Season 6 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Six</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_7.png"
-                      alt="Magnum P.I. Season 7 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Seven</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/single/season_8.png"
-                      alt="Magnum P.I. Season 8 Marker"
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">Season Eight</td>
-                </tr>
-                <tr className="legend-row">
-                  <td>
-                    <img
-                      src="images/markers/double/season_1_2.png"
-                      alt="Magnum P.I. Marker of Seasons 1 and 2."
-                      width="21"
-                      height="25"
-                    />
-                  </td>
-                  <td className="legend-season">
-                    Example: Season 1 and Season 2
-                  </td>
-                </tr>
+                <tbody>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="../images/magnum-cross.png"
+                        alt="Magnum P.I."
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <th className="legend-header">Magnum P.I. Seasons</th>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_1.png"
+                        alt="Magnum P.I. Season 1 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season One</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_2.png"
+                        alt="Magnum P.I. Season 2 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Two</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_3.png"
+                        alt="Magnum P.I. Season 3 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Three</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_4.png"
+                        alt="Magnum P.I. Season 4 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Four</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_5.png"
+                        alt="Magnum P.I. Season 5 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Five</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_6.png"
+                        alt="Magnum P.I. Season 6 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Six</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_7.png"
+                        alt="Magnum P.I. Season 7 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Seven</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/single/season_8.png"
+                        alt="Magnum P.I. Season 8 Marker"
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">Season Eight</td>
+                  </tr>
+                  <tr className="legend-row">
+                    <td>
+                      <img
+                        src="images/markers/double/season_1_2.png"
+                        alt="Magnum P.I. Marker of Seasons 1 and 2."
+                        width="21"
+                        height="25"
+                      />
+                    </td>
+                    <td className="legend-season">
+                      Example: Season 1 and Season 2
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           )}
