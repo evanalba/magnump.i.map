@@ -1,6 +1,6 @@
 <p align="center"><img src="https://github.com/evanalba/magnump.i.map/blob/main/frontend/public/logo.svg" width="400" alt="Magnum P.I. Map Logo"></p>
 
-## About Magnum P.I., Map
+## About Magnum, P.I. Map
 
 A map-based web application based on an 80s TV show called Magnum P.I..
 You can create and plot filming locations found in Magnum P.I., learn some information about a specific film location, and more.
