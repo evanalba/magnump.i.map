@@ -1,6 +1,7 @@
 import express from 'express';
 import pg from 'pg'
 import cors from 'cors';
+import { rateLimit } from 'express-rate-limit'
 
 
 const app = express();
@@ -28,9 +29,18 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
+
 // Middleware
 app.use(express.json()); // Parse JSON request bodies
 app.use(cors()); // Enable CORS for all routes
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	standardHeaders: 'draft-8',
+	legacyHeaders: false,
+})
+app.use(limiter) // Apply the rate limiting middleware to all requests.
 
 // Routes
 app.get('/api/locations', async (req, res) => {

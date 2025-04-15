@@ -24,8 +24,8 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: mydb
-    # ports:
-    #   - '5432:5432'
+    ports:
+      - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     # restart: always
@@ -39,11 +39,14 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
       PGADMIN_DEFAULT_PASSWORD: password
-      PGADMIN_LISTEN_PORT: 5432
+      PGADMIN_LISTEN_PORT: 5050
     ports:
-      - '5432:5432'
+      - '5050:5050'
     volumes:
       - pgadmin:/var/lib/pgadmin
+      - ./backend/data/magnum_locations.csv:/var/lib/pgadmin/storage/admin_pgadmin.com/magnum_locations.csv   # Mount the local csv to inside the container directory which holds all the csv files.
+
+
     depends_on:
       - postgres
     networks:
