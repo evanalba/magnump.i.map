@@ -43,7 +43,7 @@ services:
     ports:
       - '5050:5050'
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin/storage
       - ./backend/data/magnum_locations.csv:/var/lib/pgadmin/storage/admin_pgadmin.com/magnum_locations.csv   # Mount the local csv to inside the container directory which holds all the csv files.
 
 
