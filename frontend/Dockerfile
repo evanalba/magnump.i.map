@@ -1,5 +1,5 @@
 FROM debian:12-slim
-FROM node:22
+FROM node:23-slim
 
 WORKDIR /usr/app
 # Copy package requirements and install

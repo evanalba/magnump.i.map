@@ -8,3 +8,12 @@
   max-width: 60%;
   width: auto;
 }
+
+.location-update-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-headers {
+  margin-bottom: 0.3125em;
+}
