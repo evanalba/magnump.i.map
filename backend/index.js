@@ -74,6 +74,72 @@ app.post('/api/locations', async (req, res) => {
   }
 });
 
+app.delete('/api/locations/:id', async (req, res) => {
+  try {
+    const locationId = req.params.id;
+
+    // Validate the ID (Optional)
+    if (!Number.isInteger(Number(locationId))) {
+      return res.status(400).json({ error: 'Invalid location ID' });
+    }
+
+    const result = await client.query(
+      'DELETE FROM public.locations WHERE id = $1 RETURNING *',
+      [locationId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Location not found' });
+    }
+
+    res.status(200).json({ message: 'Location deleted successfully', deletedLocation: result.rows[0] });
+  } catch (error) {
+    console.error('Error deleting location:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.delete('/api/locations', async (req, res) => {
+  try {
+    await client.query('DELETE FROM public.locations');
+    res.status(200).json({ message: 'All locations deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting all locations:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.put('/api/locations/:id', async (req, res) => {
+  try {
+    const locationId = req.params.id;
+    const updatedData = req.body;
+
+    const result = await client.query(
+      'UPDATE public.locations SET name = $1, address = $2, latitude = $3, longitude = $4, image = $5, biography = $6, episodes = $7, seasons = $8 WHERE id = $9 RETURNING *',
+      [
+        updatedData.name,
+        updatedData.address,
+        updatedData.latitude,
+        updatedData.longitude,
+        updatedData.image,
+        updatedData.biography,
+        updatedData.episodes,
+        updatedData.seasons,
+        locationId,
+      ]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Location not found' });
+    }
+
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error updating location:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
