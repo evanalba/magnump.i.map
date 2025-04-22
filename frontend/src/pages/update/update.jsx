@@ -18,7 +18,7 @@ function LocationTable() {
       const data = await response.json();
       setLocations(data);
     } catch (err) {
-      console.error(err.message);
+      console.error('Error fetching locations:', err.message);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -68,9 +68,8 @@ function LocationTable() {
         </thead>
         <tbody>
           {filteredLocations.map((location) => (
-            <>
+            <React.Fragment key={location.id}>
               <tr
-                key={location.id}
                 onClick={() => handleLocationClick(location.id)}
                 style={{ cursor: "pointer" }}
               >
@@ -87,7 +86,7 @@ function LocationTable() {
                   </td>
                 </tr>
               )}
-            </>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
@@ -96,42 +95,97 @@ function LocationTable() {
 }
 
 function UpdateForm({ location, onUpdateComplete, onClose }) {
-  const [updatedLocation, setUpdatedLocation] = useState({ ...location });
+  // Initialize state, ensuring episodes is an object and seasons is an array
+  const [updatedLocation, setUpdatedLocation] = useState({
+    ...location,
+    episodes: location?.episodes && typeof location.episodes === 'object' && !Array.isArray(location.episodes) ? location.episodes : {},
+    seasons: Array.isArray(location?.seasons) ? location.seasons : [],
+    biography: location?.biography || '',
+    name: location?.name || '',
+    address: location?.address || '',
+    latitude: location?.latitude || '',
+    longitude: location?.longitude || '',
+    image: location?.image || '',
+  });
+
+  const [newEpisodeKey, setNewEpisodeKey] = useState('');
+  const [newEpisodeValue, setNewEpisodeValue] = useState('');
+
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [updateError, setUpdateError] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    let newValue = value;
+     setUpdatedLocation({
+        ...updatedLocation,
+        [name]: value,
+     });
+     setUpdateError(null);
+  };
 
-    if (name === "episodes" || name === "seasons") {
-      try {
-        newValue = JSON.parse(value);
-      } catch (parseError) {
-        setUpdateError(
-          `Invalid ${name} format.  Must be a valid JSON array (e.g., [1,2,3] or ["a","b"]).`
-        );
-        return;
-      }
+  const handleAddEpisode = () => {
+    if (!newEpisodeKey.trim()) {
+      setUpdateError("Episode key cannot be empty.");
+      return;
     }
-    setUpdatedLocation({
-      ...updatedLocation,
-      [name]: newValue,
-    });
+
+  
+    setUpdatedLocation(prevState => ({
+      ...prevState,
+      episodes: {
+        ...prevState.episodes,
+        [newEpisodeKey.trim()]: newEpisodeValue.trim()
+      }
+    }));
+
+    setNewEpisodeKey('');
+    setNewEpisodeValue('');
     setUpdateError(null);
   };
 
+   const handleRemoveEpisode = (keyToRemove) => {
+       setUpdatedLocation(prevState => {
+           const updatedEpisodes = { ...prevState.episodes };
+           delete updatedEpisodes[keyToRemove];
+           return {
+               ...prevState,
+               episodes: updatedEpisodes
+           };
+       });
+       setUpdateError(null);
+   };
+
+
   const handleUpdateSeason = (seasonNumber) => {
-    const newSeasons = updatedLocation.seasons.includes(seasonNumber)
-      ? updatedLocation.seasons.filter((s) => s !== seasonNumber)
-      : [...updatedLocation.seasons, seasonNumber];
+    const currentSeasons = Array.isArray(updatedLocation.seasons) ? updatedLocation.seasons : [];
+
+    const newSeasons = currentSeasons.includes(seasonNumber)
+      ? currentSeasons.filter((s) => s !== seasonNumber)
+      : [...currentSeasons, seasonNumber];
 
     setUpdatedLocation({ ...updatedLocation, seasons: newSeasons });
+    setUpdateError(null);
   };
+
 
   const handleUpdateSubmit = async () => {
     setIsSubmitting(true);
     setUpdateError(null);
+
+    if (typeof updatedLocation.episodes !== 'object' || updatedLocation.episodes === null || Array.isArray(updatedLocation.episodes)) {
+       setUpdateError("Invalid episodes data structure.");
+       setIsSubmitting(false);
+       return;
+    }
+     if (!Array.isArray(updatedLocation.seasons)) {
+       setUpdateError("Invalid seasons data structure.");
+       setIsSubmitting(false);
+       return;
+    }
+
+    const biographyCleaned = updatedLocation.biography.replace(/\s+/g, " ").trim();
+
     try {
       const response = await fetch(
         `http://localhost:8080/api/locations/${location.id}`,
@@ -140,17 +194,22 @@ function UpdateForm({ location, onUpdateComplete, onClose }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(updatedLocation),
+          body: JSON.stringify({
+             ...updatedLocation,
+             biography: biographyCleaned, // Use cleaned biography
+          }),
         }
       );
       if (!response.ok) {
         const errorData = await response.json();
+         // Prefer the backend's error message if available
         throw new Error(
           `HTTP error! status: ${response.status}, message: ${
-            errorData?.message || "Failed to update location"
+            errorData?.error || errorData?.message || "Failed to update location"
           }`
         );
       }
+      // Assuming successful update, refetch data and close form
       onUpdateComplete();
       onClose();
     } catch (error) {
@@ -161,17 +220,11 @@ function UpdateForm({ location, onUpdateComplete, onClose }) {
     }
   };
 
-  useEffect(() => {
-    if (location) {
-      updatedLocation.biography = updatedLocation.biography.replace(
-        /\s+/g,
-        " "
-      );
-      updatedLocation.biography = updatedLocation.biography.replace(/\n/g, " ");
 
-      setUpdatedLocation({ ...updatedLocation });
-    }
-  }, [location]);
+  // Ensure updatedLocation is not null before rendering the form (should not happen with useState initializer)
+  if (!updatedLocation) {
+      return <div>Loading update form...</div>;
+  }
 
   return (
     <div
@@ -179,6 +232,7 @@ function UpdateForm({ location, onUpdateComplete, onClose }) {
     >
       <h2>Update Location</h2>
       {updateError && <p style={{ color: "red" }}>{updateError}</p>}
+
       <div className="location-update-section">
         <label className="location-headers">Name:</label>
         <input
@@ -241,21 +295,50 @@ function UpdateForm({ location, onUpdateComplete, onClose }) {
         />
       </div>
       <br />
+
       <div className="location-update-section">
         <label className="location-headers">Episodes:</label>
-        <input
-          type="text"
-          name="episodes"
-          value={JSON.stringify(updatedLocation.episodes)}
-          onChange={handleInputChange}
-        />
+        <div style={{ border: "1px dashed #ccc", padding: "10px", marginBottom: "10px" }}>
+           {Object.keys(updatedLocation.episodes).length > 0 ? (
+               <ul>
+                   {Object.entries(updatedLocation.episodes).map(([key, value]) => (
+                       <li key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
+                           <span><strong>{key}:</strong> {value}</span>
+                           <button onClick={() => handleRemoveEpisode(key)} style={{ marginLeft: '10px', cursor: 'pointer' }}>Remove</button>
+                       </li>
+                   ))}
+               </ul>
+           ) : (
+               <p>No episodes added yet.</p>
+           )}
+        </div>
+        <div className="location-update-section">
+            <label className="location-headers">New Episode:</label>
+            <input
+                type="text"
+                value={newEpisodeKey}
+                onChange={(e) => setNewEpisodeKey(e.target.value)}
+                placeholder="Italian Ice (2.16)"
+            />
+            <br />
+             <label className="location-headers">New Link:</label>
+            <input
+                type="text"
+                value={newEpisodeValue}
+                onChange={(e) => setNewEpisodeValue(e.target.value)}
+                placeholder="https://magnum-mania.com/Episodes/Season2/Italian_Ice.html"
+            />
+            <br />
+        </div>
       </div>
+        <button onClick={handleAddEpisode}>Add Episode</button>
+      <br />
       <br />
       <div className="location-update-section">
         <label className="location-headers">Seasons:</label>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((season) => {
-            const isChecked = updatedLocation.seasons.includes(season);
+            const isChecked = (Array.isArray(updatedLocation.seasons) ? updatedLocation.seasons : []).includes(season);
             return (
               <div
                 key={season}
@@ -277,14 +360,9 @@ function UpdateForm({ location, onUpdateComplete, onClose }) {
             );
           })}
         </div>
-        {/* <input
-          type="text"
-          name="seasons"
-          value={JSON.stringify(updatedLocation.seasons)}
-          onChange={handleInputChange}
-        /> */}
       </div>
       <br />
+
       <button onClick={handleUpdateSubmit} disabled={isSubmitting}>
         {isSubmitting ? "Saving..." : "Save Update"}
       </button>

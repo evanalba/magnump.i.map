@@ -120,7 +120,7 @@
 
                     let episodesList = '';
                     for (const [key, value] of episodesArray) {
-                        if (value && value.trim() !== "") {
+                        if (value !== "") {
                             episodesList += `<li><a href="${value}" target="_blank">${key}</a></li>`;
                         } else {
                             episodesList += `<li>${key}</li>`;
