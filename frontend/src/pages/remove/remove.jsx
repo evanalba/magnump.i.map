@@ -1,10 +1,10 @@
-import { Credits } from '../../App';
-import React, { useState, useEffect } from 'react';
+import { Credits } from "../../App";
+import React, { useState, useEffect } from "react";
 
 function LocationTable() {
   const [locations, setLocations] = useState(null);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredLocations, setFilteredLocations] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function LocationTable() {
   }, [locations, searchTerm]);
 
   const fetchData = async () => {
-    const url = 'http://localhost:8080/api/locations';
+    const url = "http://localhost:8080/api/locations";
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -37,24 +37,9 @@ function LocationTable() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/api/locations/${id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        fetchData();
-      })
-      .catch((error) => {
-        console.error('Error deleting location:', error);
-      });
-  };
-
-  const handleDeleteAll = () => {
-    if (window.confirm('Are you sure you want to delete all locations?')) {
-      fetch('http://localhost:8080/api/locations', {
-        method: 'DELETE',
+    if (window.confirm("Are you sure you want to delete this location?")) {
+      fetch(`http://localhost:8080/api/locations/${id}`, {
+        method: "DELETE",
       })
         .then((response) => {
           if (!response.ok) {
@@ -63,7 +48,24 @@ function LocationTable() {
           fetchData();
         })
         .catch((error) => {
-          console.error('Error deleting all locations:', error);
+          console.error("Error deleting location:", error);
+        });
+    }
+  };
+
+  const handleDeleteAll = () => {
+    if (window.confirm("Are you sure you want to delete all locations?")) {
+      fetch("http://localhost:8080/api/locations", {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          fetchData();
+        })
+        .catch((error) => {
+          console.error("Error deleting all locations:", error);
         });
     }
   };
@@ -107,7 +109,7 @@ function LocationTable() {
         </tbody>
       </table>
     );
-  } else if (displayLocations && typeof displayLocations === 'object') {
+  } else if (displayLocations && typeof displayLocations === "object") {
     tableHTML = (
       <table className="remove-table">
         <thead>
@@ -146,18 +148,23 @@ function LocationTable() {
   }
 
   return (
-    <div style={{ textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
       <input
         type="text"
         placeholder="Search locations..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: '0.625em' }}
+        style={{ marginBottom: "0.625em" }}
       />
       {tableHTML}
       <button
         onClick={handleDeleteAll}
-        style={{ backgroundColor: 'red', color: 'white', marginTop: '1.25em', marginBottom: '1.25em' }}
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          marginTop: "1.25em",
+          marginBottom: "1.25em",
+        }}
       >
         Delete All Locations
       </button>

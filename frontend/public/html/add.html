@@ -55,21 +55,6 @@
         <input class="add-input" type="url" id="image-upload" name="image" required>
         <span id="image-error" style="color: red;"></span>
       </div>
-
-      <!-- <script>
-        // document.getElementById('image-upload').addEventListener('change', function () {
-        //   const url = this.value;
-        //   const errorSpan = document.getElementById('image-error');
-
-        //   if (url && (url.toLowerCase().endsWith('.jpg') || url.toLowerCase().endsWith('.jpeg'))) {
-        //     errorSpan.textContent = '';
-        //     this.setCustomValidity('');
-        //   } else {
-        //     errorSpan.textContent = 'URL must end with .jpg or .jpeg';
-        //     this.setCustomValidity('URL must end with .jpg or .jpeg');
-        //   }
-        // });
-      </script> -->
       <br>
       <div class="add-form">
         <label>Add some information about the location:</label>
@@ -128,7 +113,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="3"><button onclick="addRow()">Add Row</button></td>
+              <td colspan="3"><button type="button" onclick="addRow()">Add Row</button></td>
             </tr>
           </tfoot>
         </table>
@@ -201,7 +186,7 @@
             const imageUrl = document.getElementById('image-upload').value;
             const locationDescription = document.getElementById('location-description').value;
             const selection = document.getElementById('selection').value;
-            let episodes = [];
+            let episodes = {};
             let seasons = [];
 
             if (selection === 'option1') {
@@ -209,25 +194,11 @@
               const urlInputs = document.querySelectorAll('.url-input');
 
               nameInputs.forEach((nameInput, index) => {
-                if (nameInput.value && urlInputs[index].value) {
-                    episodes.push({
-                        key: nameInput.value,
-                        value: urlInputs[index].value
-                    }); // Add key-value object to the array
-                }
-            });
+                episodes[nameInput.value] = urlInputs[index].value;
+              });
             } else if (selection === 'option2') {
               const textAreaInput = document.getElementById('textAreaInput').value;
-              // Parse custom episode information from the text area if needed.
-              // You might need to split the text by lines or commas and create an object.
-              // For example:
-              textAreaInput.split('\n').forEach(line => {
-                const [name, url] = line.split(',');
-                if (name && url) {
-                  episodes[name.trim()] = url.trim();
-                }
-              });
-              episodes = textAreaInput;
+              episodes[textAreaInput] = '';
             }
 
             const seasonCheckboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -273,7 +244,7 @@
           });
 
           function isValidUrl(url) {
-            // TODO: Add Validator.js!
+            // EXTRA: Add Validator.js!
 
             // validator.isURL(url, { protocols: ['http','https','ftp'] })
             try {
